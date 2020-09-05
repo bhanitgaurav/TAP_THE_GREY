@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,9 +25,10 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
     private int mSpeedBooster = TapTheGrey.Count.TEN;
     private int UNIT_TIME = TapTheGrey.Time.ONE_SECOND;
     private ImageView mImageOne, mImageTwo, mImageThree, mImageFour;
-    private TextView mStart, mScoreBoard, mBhanitgauravEmail;
+    private TextView mStart, mScoreBoard, mBhanitgauravEmail, mMaxScoreView;
     private boolean isRunning;
     private static int mScore = -1;
+    private static int mMaxScore = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         mStart = findViewById(R.id.start);
         mScoreBoard = findViewById(R.id.score);
         mBhanitgauravEmail = findViewById(R.id.bottom_name);
+        mMaxScoreView = findViewById(R.id.max_score);
         mImageOne.setOnClickListener(this);
         mImageTwo.setOnClickListener(this);
         mImageThree.setOnClickListener(this);
@@ -135,10 +138,14 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         if (mScore == mSpeedBooster) {
             UNIT_TIME = UNIT_TIME - TapTheGrey.Count.TEN * TapTheGrey.Count.TEN;
             mSpeedBooster = mSpeedBooster + TapTheGrey.Count.TEN;
-            Toast.makeText(this, "Speed Boosted", Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(this, "Speed Boosted",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP | Gravity.CENTER, 00, 450);
+            toast.show();
             Log.d(TAG, "updateScoreAndBoostSpeed: speed boosted");
         }
-
+        if (mScore > mMaxScore)
+            mMaxScore = mScore;
     }
 
     private void showAlertBox() {
@@ -166,7 +173,7 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         mStart.setTextColor(ContextCompat.getColor(this, R.color.white));
         UNIT_TIME = TapTheGrey.Time.ONE_SECOND;
         mSpeedBooster = TapTheGrey.Count.TEN;
-
+        mMaxScoreView.setText(String.valueOf(mMaxScore));
     }
 
     @Override
