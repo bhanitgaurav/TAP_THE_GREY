@@ -91,7 +91,7 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         Log.d(TAG, "mailTextSet: ");
         String URL = "https://www.linkedin.com/in/bhanitgaurav";
         mBhanitgauravEmail.setText(HtmlCompat.fromHtml(
-                "Design By: <font color='#006b82'> <a href=\"" + URL + "\">Bhanit Gaurav</a> </font>"
+                "<font color='#0062b0'> <a href=\"" + URL + "\">Bhanit Gaurav</a> </font>"
                 , HtmlCompat.FROM_HTML_MODE_LEGACY));
         mBhanitgauravEmail.setMovementMethod(LinkMovementMethod.getInstance());
     }
