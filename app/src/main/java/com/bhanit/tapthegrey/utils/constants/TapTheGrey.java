@@ -36,4 +36,19 @@ public interface TapTheGrey {
         String USER_SAVE = "patient_save";
 
     }
+
+    public interface Count {
+        int TEN = 10;
+        int TWENTY = 20;
+        int THIRTY = 30;
+        int FORTY = 40;
+        int FIFTY = 50;
+        int SIXTY = 60;
+        int SEVENTY = 70;
+        int EIGHTY = 80;
+        int NNETY = 90;
+        int HUNDRED = 100;
+
+
+    }
 }

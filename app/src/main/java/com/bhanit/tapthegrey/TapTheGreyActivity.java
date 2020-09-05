@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +21,8 @@ import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
 public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = TapTheGreyActivity.class.getSimpleName();
     private static int mLastRandomNumber;
+    private int mSpeedBooster = TapTheGrey.Count.TEN;
+    private int UNIT_TIME = TapTheGrey.Time.ONE_SECOND;
     private ImageView mImageOne, mImageTwo, mImageThree, mImageFour;
     private TextView mStart, mScoreBoard, mBhanitgauravEmail;
     private boolean isRunning;
@@ -111,15 +114,30 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         Log.d(TAG, "startPlay:isRunning " + isRunning);
         if (isRunning) {
             chooseBoxToFillColor(getRandomBetweenRange(1, 4));
-            handler.postDelayed(runnable, 1000);
-            mScore = mScore + 1;
-            mScoreBoard.setText(String.format("Score: %s", String.valueOf(mScore)));
+            handler.postDelayed(runnable, UNIT_TIME);
+            updateScoreAndBoostSpeed();
             isRunning = false;
             mStart.setEnabled(false);
             mStart.setBackground(ContextCompat.getDrawable(this, R.drawable.button_disable));
             mStart.setTextColor(ContextCompat.getColor(this, R.color.grey));
         } else showAlertBox();
         Log.d(TAG, "startPlay:isRunning " + isRunning);
+
+    }
+
+    private void updateScoreAndBoostSpeed() {
+        Log.d(TAG, "updateScoreAndBoostSpeed:mUpdateScore " + mScore);
+        Log.d(TAG, "updateScoreAndBoostSpeed: mSpeedBooster " + mSpeedBooster);
+        Log.d(TAG, "updateScoreAndBoostSpeed: UNIT TIME " + UNIT_TIME);
+
+        mScore = mScore + 1;
+        mScoreBoard.setText(String.format("Score: %s", String.valueOf(mScore)));
+        if (mScore == mSpeedBooster) {
+            UNIT_TIME = UNIT_TIME - TapTheGrey.Count.TEN * TapTheGrey.Count.TEN;
+            mSpeedBooster = mSpeedBooster + TapTheGrey.Count.TEN;
+            Toast.makeText(this, "Speed Boosted", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "updateScoreAndBoostSpeed: speed boosted");
+        }
 
     }
 
@@ -146,6 +164,8 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         mStart.setEnabled(true);
         mStart.setBackground(ContextCompat.getDrawable(this, R.drawable.button));
         mStart.setTextColor(ContextCompat.getColor(this, R.color.white));
+        UNIT_TIME = TapTheGrey.Time.ONE_SECOND;
+        mSpeedBooster = TapTheGrey.Count.TEN;
 
     }
 
@@ -228,7 +248,7 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
     private void fillColorInBox(ImageView boxToColor, int color) {
         Log.d(TAG, "fillColorInBox: ");
         boxToColor.setTag(TapTheGrey.Color.GREY);
-        boxToColor.setBackgroundColor(getColor(R.color.grey));
+        boxToColor.setBackgroundColor(getColor(R.color.darkgrey));
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -238,7 +258,7 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
                 boxToColor.setBackgroundColor(color);
                 handler.removeCallbacks(this);
             }
-        }, 1000);
+        }, UNIT_TIME);
     }
 }
 
