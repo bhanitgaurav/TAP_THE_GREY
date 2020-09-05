@@ -1,0 +1,9 @@
+<manifest package="com.bhanit.tapthegrey">
+
+    <application>
+        <!--<meta-data
+            android:name="CLOUDNARY_URL"
+            android:values="cloudnary://testenv" />-->
+    </application>
+
+</manifest>

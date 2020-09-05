@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TAP THE GREY</string>
+    <string name="tap_the_grey">TAP THE GREY</string>
+    <string name="copyright">Copyright \u00A9 2020, Tap The Grey</string>
+    <string name="designed_by">Designed with lots of love by: <b>Bhanit Gaurav</b> </string>
+    <string name="score_8">Score: 8</string>
+    <string name="image">Image</string>
+    <string name="start">START</string>
+    <string name="game_over">Game Over</string>
+    <string name="play_again">Play Again</string>
+    <string name="your_score">Your Score is :</string>
+    <string name="bhanit_gaurav">Bhanit Gaurav</string>
 </resources>

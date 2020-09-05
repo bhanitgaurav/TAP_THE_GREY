@@ -8,20 +8,60 @@ android {
         applicationId "com.bhanit.tapthegrey"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    flavorDimensions "api"
+    productFlavors {
+        dev {
+            dimension "api"
+            versionCode 1
+            versionName "1.0.0"
+            applicationId "com.bhanit.tapthegrey"
+            buildConfigField 'String', 'AUTHORITY', '"com.bhanit.tapthegrey"'
+            dependencies {
+                debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+                releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+                testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+                testImplementation 'junit:junit:4.12'
+            }
+        }
+        production {
+            dimension "api"
+            applicationId "com.bhanit.tapthegrey"
+            buildConfigField 'String', 'AUTHORITY', '"com.bhanit.tapthegrey"'
+            versionCode 1
+            versionName "1.0.0"
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
+            debuggable true
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-}
 
+
+    aaptOptions {
+        cruncherEnabled = true
+    }
+
+    dexOptions {
+        additionalParameters = ['--core-library']
+    }
+}
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
