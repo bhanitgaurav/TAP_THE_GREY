@@ -206,7 +206,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         leftButton.setText(getResources().getString(R.string.play_again));
         leftButton.setTextColor(ContextCompat.getColor(mActivity, R.color.colorBlack));
 
-        openDialog.setCanceledOnTouchOutside(true);
+        openDialog.setCanceledOnTouchOutside(false);
 
         rightButton.setOnClickListener(v -> {
             com.bhanit.tapthegrey.helper.Log.d(TAG, "onClick: ");

@@ -13,4 +13,5 @@
     <dimen name="dimen_6dp">6dp</dimen>
     <dimen name="dimen16sp">16sp</dimen>
     <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_36sp">36sp</dimen>
 </resources>
