@@ -3,6 +3,7 @@ package com.bhanit.tapthegrey.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.bhanit.tapthegrey.helper.Log;
 import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
 
 

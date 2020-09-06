@@ -3,10 +3,10 @@ package com.bhanit.tapthegrey;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bhanit.tapthegrey.helper.Log;
 import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
 
 public class SplashActivity extends AppCompatActivity {

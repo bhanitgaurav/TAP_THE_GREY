@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
+import com.bhanit.tapthegrey.helper.Log;
 import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
 
 public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener {
