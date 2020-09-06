@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
-import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
@@ -116,7 +114,6 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     private void startPlay() {
         Log.d(TAG, "startPlay: ");
         Runnable runnable;
@@ -165,8 +162,9 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     private void showAlertBox() {
         Log.d(TAG, "showAlertBox()");
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mActivity);
+        alertDialog.setIcon(ContextCompat.getDrawable(mActivity, R.mipmap.ic_launcher_round));
         alertDialog.setTitle(getResources().getString(R.string.game_over));
-        alertDialog.setMessage(getString(R.string.your_score) + String.valueOf(mScore));
+        alertDialog.setMessage(""+getString(R.string.your_score) + " "+String.valueOf(mScore));
         alertDialog.setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.play_again), (DialogInterface dialog, int which) -> {
                     alertDialog.setCancelable(true);
