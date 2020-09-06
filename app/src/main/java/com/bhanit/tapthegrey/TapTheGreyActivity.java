@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -13,16 +13,19 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bhanit.tapthegrey.helper.Log;
+
 import java.util.Objects;
 
 
-public class TapTheGreyActivity extends AppCompatActivity {
+public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = TapTheGreyActivity.class.getSimpleName();
-
+    private TextView mBhanitgauravEmail;
     private LevelOneFragment mLevelOneFragment;
     private Fragment mCurrentVisibleFragment, mPreviousFragment;
     private FragmentManager mManager = getSupportFragmentManager();
@@ -32,12 +35,20 @@ public class TapTheGreyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tag_the_grey);
+        Log.d(TAG, "onCreate: ");
+        initViewsAndSetOnclickListener();
         if (mLevelOneFragment == null) {
             mLevelOneFragment = LevelOneFragment.newInstance();
             addShowFragment(mLevelOneFragment);
         }
     }
 
+    private void initViewsAndSetOnclickListener() {
+        Log.d(TAG, "initViewsAndSetOnclickListener: ");
+        mBhanitgauravEmail = findViewById(R.id.bottom_name);
+        mBhanitgauravEmail.setOnClickListener(this);
+
+    }
 
     /**
      * Method helps to add new fragment or to show hidden fragment.
@@ -45,11 +56,11 @@ public class TapTheGreyActivity extends AppCompatActivity {
      * @param fragment fragment to show or add
      */
     private void addShowFragment(Fragment fragment) {
-        android.util.Log.d(TAG, "addShowFragment: " + fragment);
+        Log.d(TAG, "addShowFragment: " + fragment);
         mCurrentVisibleFragment = fragment;
         FragmentTransaction fragmentTransaction = mManager.beginTransaction();
         if (!fragment.isAdded()) {
-            android.util.Log.d(TAG, "addShowFragment: fragment Added");
+            Log.d(TAG, "addShowFragment: fragment Added");
             fragmentTransaction.add(R.id.main_layout, fragment).commit();
         } else
             showFragment(fragment);
@@ -61,7 +72,7 @@ public class TapTheGreyActivity extends AppCompatActivity {
      * @param fragment fragment to hide
      */
     private void hideFragment(Fragment fragment) {
-        android.util.Log.d(TAG, "hideFragment: ");
+        Log.d(TAG, "hideFragment: ");
         FragmentTransaction ft = mManager.beginTransaction();
         ft.hide(fragment);
         ft.commit();
@@ -73,7 +84,7 @@ public class TapTheGreyActivity extends AppCompatActivity {
      * @param fragment fragment to show
      */
     private void showFragment(Fragment fragment) {
-        android.util.Log.d(TAG, "showFragment: ");
+        Log.d(TAG, "showFragment: ");
         FragmentTransaction ft = mManager.beginTransaction();
         ft.show(fragment);
         ft.commit();
@@ -129,6 +140,27 @@ public class TapTheGreyActivity extends AppCompatActivity {
             mExit = false;
         });
         openDialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
+        switch (v.getId()) {
+            case R.id.bottom_name: {
+                Log.d(TAG, "onClick: bhanitgaurav mail");
+                mailTextSet();
+                break;
+            }
+        }
+    }
+
+    private void mailTextSet() {
+        Log.d(TAG, "mailTextSet: ");
+        String URL = "https://www.linkedin.com/in/bhanitgaurav";
+        mBhanitgauravEmail.setText(HtmlCompat.fromHtml(
+                "<font color='#0062b0'> <a href=\"" + URL + "\">Bhanit Gaurav</a> </font>"
+                , HtmlCompat.FROM_HTML_MODE_LEGACY));
+        mBhanitgauravEmail.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
 

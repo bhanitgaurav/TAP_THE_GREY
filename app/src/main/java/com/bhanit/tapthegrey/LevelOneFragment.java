@@ -26,7 +26,7 @@ import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
 public class LevelOneFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = LevelOneFragment.class.getSimpleName();
     private ImageView mImageOne, mImageTwo, mImageThree, mImageFour;
-    private TextView mStart, mScoreBoard, mBhanitgauravEmail, mMaxScoreView;
+    private TextView mStart, mScoreBoard, mMaxScoreView;
     private static int mLastRandomNumber;
     private int mSpeedBooster = TapTheGrey.Count.TEN;
     private int UNIT_TIME = TapTheGrey.Time.ONE_SECOND;
@@ -73,14 +73,13 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         mImageFour = view.findViewById(R.id.four);
         mStart = view.findViewById(R.id.start);
         mScoreBoard = view.findViewById(R.id.score);
-        mBhanitgauravEmail = view.findViewById(R.id.bottom_name);
+
         mMaxScoreView = view.findViewById(R.id.max_score);
         mImageOne.setOnClickListener(this);
         mImageTwo.setOnClickListener(this);
         mImageThree.setOnClickListener(this);
         mImageFour.setOnClickListener(this);
         mStart.setOnClickListener(this);
-        mBhanitgauravEmail.setOnClickListener(this);
 
     }
 
@@ -88,11 +87,6 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Log.d(TAG, "onClick: ");
         switch (v.getId()) {
-            case R.id.bottom_name: {
-                Log.d(TAG, "onClick: bhanitgaurav mail");
-                mailTextSet();
-                break;
-            }
             case R.id.start: {
                 Log.d(TAG, "onClick: start");
                 startPlay();
@@ -121,14 +115,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void mailTextSet() {
-        Log.d(TAG, "mailTextSet: ");
-        String URL = "https://www.linkedin.com/in/bhanitgaurav";
-        mBhanitgauravEmail.setText(HtmlCompat.fromHtml(
-                "<font color='#0062b0'> <a href=\"" + URL + "\">Bhanit Gaurav</a> </font>"
-                , HtmlCompat.FROM_HTML_MODE_LEGACY));
-        mBhanitgauravEmail.setMovementMethod(LinkMovementMethod.getInstance());
-    }
+
 
     private void startPlay() {
         Log.d(TAG, "startPlay: ");

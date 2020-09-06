@@ -20,7 +20,7 @@
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginTop="@dimen/dimen_12dp"
             android:contentDescription="@string/image_view"
-            android:src="@drawable/ic_info"
+            android:src="@mipmap/ic_launcher_foreground"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@id/heading"
             app:layout_constraintEnd_toEndOf="parent"
