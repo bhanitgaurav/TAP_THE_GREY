@@ -204,7 +204,7 @@ public class LevelTwoFragment extends Fragment implements View.OnClickListener {
         }
         if (mScore > mMaxScore)
             mMaxScore = mScore;
-        if (mScore == 90) {
+        if (mScore == TapTheGrey.LevelChange.LEVEL_CHANGE_SCORE) {
             levelOnePassedAndOpenLevelTwo();
         }
 
@@ -247,7 +247,7 @@ public class LevelTwoFragment extends Fragment implements View.OnClickListener {
         rightButton.setOnClickListener(v -> {
             com.bhanit.tapthegrey.helper.Log.d(TAG, "onClick: ");
             openDialog.dismiss();
-            mTapTheGreyActivityInteraction.launchLevelThree(mScore,TapTheGrey.Level.TWO);
+            mTapTheGreyActivityInteraction.launchLevelThree(mScore, TapTheGrey.Level.TWO);
         });
         leftButton.setOnClickListener(v -> {
             com.bhanit.tapthegrey.helper.Log.d(TAG, "onClick: ");

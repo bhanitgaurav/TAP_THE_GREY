@@ -168,7 +168,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         }
         if (mScore > mMaxScore)
             mMaxScore = mScore;
-        if (mScore == 90) {
+        if (mScore == TapTheGrey.LevelChange.LEVEL_CHANGE_SCORE) {
             levelOnePassedAndOpenLevelTwo();
         }
 

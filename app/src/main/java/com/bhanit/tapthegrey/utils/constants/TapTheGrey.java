@@ -12,6 +12,10 @@ public interface TapTheGrey {
         String GREY = "grey";
     }
 
+    interface LevelChange {
+        int LEVEL_CHANGE_SCORE = 90;
+    }
+
     interface Time {
         int FIVE_SECOND = 5000;
         int ONE_SECOND = 1000;
