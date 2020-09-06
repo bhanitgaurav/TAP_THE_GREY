@@ -27,6 +27,15 @@ public interface TapTheGrey {
 
     }
 
+    interface Level {
+        String ONE = "one";
+        String TWO = "two";
+        String THREE = "three";
+        String FOUR = "four";
+
+
+    }
+
     interface SharedPreferences {
         String CITY_LIST = "city_list";
         String LOCALITY_LIST = "locality_list";
@@ -38,6 +47,7 @@ public interface TapTheGrey {
     }
 
     public interface Count {
+        int SEVEN = 7;
         int TEN = 10;
         int TWENTY = 20;
         int THIRTY = 30;

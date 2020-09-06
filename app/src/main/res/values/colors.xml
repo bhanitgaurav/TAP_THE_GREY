@@ -14,6 +14,12 @@
     <color name="dialog_color">#F5AEAE</color>
     <color name="colorBlack">#000000</color>
     <color name="colorActiveLite">#d5e7ec</color>
-
+    <color name="voilet">#8B008B</color>
+    <color name="light_brownish">#F69256</color>
+    <color name="pink">#FE53BB</color>
+    <color name="teal_green">#808000</color>
+    <color name="tomato">#CD5C5C</color>
+    <color name="card_background_color">#36FF0000</color>
+    <color name="color_level_passed">#ADDFAD</color>
 
 </resources>

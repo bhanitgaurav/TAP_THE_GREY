@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#36FF0000">
+        android:background="@color/card_background_color">
 
         <ImageView
             android:id="@+id/image_view"

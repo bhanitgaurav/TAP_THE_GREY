@@ -35,7 +35,7 @@
         android:layout_height="256dp"
         android:baselineAligned="false"
         android:elevation="0dp"
-        android:weightSum="2"
+        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="@id/guideline5"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
@@ -47,10 +47,10 @@
             android:layout_weight="1"
             android:elevation="0dp"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <ImageView
-                android:id="@+id/two"
+                android:id="@+id/one"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -63,11 +63,22 @@
             </ImageView>
 
             <ImageView
-                android:id="@+id/three"
+                android:id="@+id/two"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@color/yellow"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/three"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/tomato"
                 android:contentDescription="@string/image"
                 android:foreground="?attr/selectableItemBackground">
 
@@ -80,10 +91,10 @@
             android:layout_weight="1"
             android:elevation="0dp"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <ImageView
-                android:id="@+id/one"
+                android:id="@+id/four"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -96,7 +107,7 @@
             </ImageView>
 
             <ImageView
-                android:id="@+id/four"
+                android:id="@+id/five"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -105,7 +116,63 @@
                 android:foreground="?attr/selectableItemBackground">
 
             </ImageView>
+
+            <ImageView
+                android:id="@+id/six"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/teal_green"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/seven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/voilet"
+                android:contentDescription="@string/image"
+                android:elevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="NestedWeights">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/eight"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/light_brownish"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/nine"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/pink"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView

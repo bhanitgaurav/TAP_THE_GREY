@@ -28,9 +28,9 @@ import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
 
 import java.util.Objects;
 
-public class LevelOneFragment extends Fragment implements View.OnClickListener {
-    private static final String TAG = LevelOneFragment.class.getSimpleName();
-    private ImageView mImageOne, mImageTwo, mImageThree, mImageFour;
+public class LevelTwoFragment extends Fragment implements View.OnClickListener {
+    private static final String TAG = LevelTwoFragment.class.getSimpleName();
+    private ImageView mImageOne, mImageTwo, mImageThree, mImageFour, mImageFive, mImageSix, mImageSeven, mImageEight, mImageNine;
     private TextView mStart, mScoreBoard, mMaxScoreView;
     private static int mLastRandomNumber;
     private int mSpeedBooster = TapTheGrey.Count.TEN;
@@ -39,20 +39,20 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     private static int mScore = -1;
     private static int mMaxScore = 0;
     private TapTheGreyActivity mActivity;
-    private TapTheGreyActivityInteraction mTapTheGreyActivityInteraction;
     private boolean isLevelUp;
+    private TapTheGreyActivityInteraction mTapTheGreyActivityInteraction;
 
-    public static LevelOneFragment newInstance() {
+    public static LevelTwoFragment newInstance() {
         Log.d(TAG, "newInstance: ");
-        LevelOneFragment levelOneFragment = new LevelOneFragment();
-        return levelOneFragment;
+        LevelTwoFragment levelTwoFragment = new LevelTwoFragment();
+        return levelTwoFragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: ");
-        View view = inflater.inflate(R.layout.fragment_level_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_level_two, container, false);
         initViewAndListener(view);
         resetTapTheGrey();
         return view;
@@ -62,9 +62,10 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        Log.d(TAG, "onStart: ");
         mActivity = (TapTheGreyActivity) context;
         mTapTheGreyActivityInteraction = (TapTheGreyActivityInteraction) context;
-        Log.d(TAG, "onStart: ");
+
     }
 
     @Override
@@ -80,6 +81,11 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         mImageTwo = view.findViewById(R.id.two);
         mImageThree = view.findViewById(R.id.three);
         mImageFour = view.findViewById(R.id.four);
+        mImageFive = view.findViewById(R.id.five);
+        mImageSix = view.findViewById(R.id.six);
+        mImageSeven = view.findViewById(R.id.seven);
+        mImageEight = view.findViewById(R.id.eight);
+        mImageNine = view.findViewById(R.id.nine);
         mStart = view.findViewById(R.id.start);
         mScoreBoard = view.findViewById(R.id.score);
 
@@ -88,6 +94,11 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         mImageTwo.setOnClickListener(this);
         mImageThree.setOnClickListener(this);
         mImageFour.setOnClickListener(this);
+        mImageFive.setOnClickListener(this);
+        mImageSix.setOnClickListener(this);
+        mImageSeven.setOnClickListener(this);
+        mImageEight.setOnClickListener(this);
+        mImageNine.setOnClickListener(this);
         mStart.setOnClickListener(this);
 
     }
@@ -121,6 +132,31 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
                 hitGrey(4, v);
                 break;
             }
+            case R.id.five: {
+                Log.d(TAG, "onClick: four");
+                hitGrey(5, v);
+                break;
+            }
+            case R.id.six: {
+                Log.d(TAG, "onClick: four");
+                hitGrey(6, v);
+                break;
+            }
+            case R.id.seven: {
+                Log.d(TAG, "onClick: four");
+                hitGrey(7, v);
+                break;
+            }
+            case R.id.eight: {
+                Log.d(TAG, "onClick: four");
+                hitGrey(8, v);
+                break;
+            }
+            case R.id.nine: {
+                Log.d(TAG, "onClick: four");
+                hitGrey(9, v);
+                break;
+            }
         }
     }
 
@@ -139,7 +175,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         };
         Log.d(TAG, "startPlay:isRunning " + isRunning);
         if (isRunning) {
-            chooseBoxToFillColor(getRandomBetweenRange(1, 4));
+            chooseBoxToFillColor(getRandomBetweenRange(1, 9));
             handler.postDelayed(runnable, UNIT_TIME);
             updateScoreAndBoostSpeed();
             isRunning = false;
@@ -177,7 +213,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     private void levelOnePassedAndOpenLevelTwo() {
         Log.d(TAG, "levelOnePassedAndOpenLevelTwo: ");
         isLevelUp = true;
-        alertDialog(getString(R.string.level_one_passed), getString(R.string.go_to_next_level));
+        alertDialog(getString(R.string.level_two_passed), getString(R.string.go_to_next_level));
     }
 
     private void alertDialog(String message, String smallMessage) {
@@ -211,8 +247,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         rightButton.setOnClickListener(v -> {
             com.bhanit.tapthegrey.helper.Log.d(TAG, "onClick: ");
             openDialog.dismiss();
-            mTapTheGreyActivityInteraction.launchLevelTwo(mScore, TapTheGrey.Level.ONE);
-
+            mTapTheGreyActivityInteraction.launchLevelThree(mScore,TapTheGrey.Level.TWO);
         });
         leftButton.setOnClickListener(v -> {
             com.bhanit.tapthegrey.helper.Log.d(TAG, "onClick: ");
@@ -223,7 +258,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showAlertBox(boolean isLevelUp) {
-        Log.d(TAG, "showAlertBox() isLevelUp: " + isLevelUp);
+        Log.d(TAG, "showAlertBox()");
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mActivity);
         alertDialog.setIcon(ContextCompat.getDrawable(mActivity, R.mipmap.ic_launcher_round));
         alertDialog.setTitle(getResources().getString(R.string.game_over));
@@ -281,15 +316,46 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
                     isRunning = true;
                 break;
             }
+            case 5: {
+                Log.d(TAG, "hitGrey: 5" + v.getTag());
+                if (v.getTag() != null)
+                    isRunning = true;
+                break;
+            }
+            case 6: {
+                Log.d(TAG, "hitGrey: 6" + v.getTag());
+                if (v.getTag() != null)
+                    isRunning = true;
+                break;
+            }
+            case 7: {
+                Log.d(TAG, "hitGrey: 7" + v.getTag());
+                if (v.getTag() != null)
+                    isRunning = true;
+                break;
+            }
+            case 8: {
+                Log.d(TAG, "hitGrey: 8" + v.getTag());
+                if (v.getTag() != null)
+                    isRunning = true;
+                break;
+            }
+            case 9: {
+                Log.d(TAG, "hitGrey: 9" + v.getTag());
+                if (v.getTag() != null)
+                    isRunning = true;
+                break;
+            }
         }
     }
 
     public static int getRandomBetweenRange(int min, int max) {
         Log.d(TAG, "getRandomBetweenRange: ");
         int currentRandomNumber = (int) ((Math.random() * ((max - min) + 1)) + min);
-        if (mLastRandomNumber == currentRandomNumber)
-            return getRandomBetweenRange(1, 4);
-        else {
+        Log.d(TAG, "getRandomBetweenRange: currentRandomNumber" + currentRandomNumber);
+        if (mLastRandomNumber == currentRandomNumber) {
+            return getRandomBetweenRange(1, 9);
+        } else {
             mLastRandomNumber = currentRandomNumber;
             return currentRandomNumber;
         }
@@ -300,23 +366,49 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "chooseBoxToFillColor: ");
         switch (chooseBox) {
             case 1: {
-                Log.d(TAG, "chooseBoxToFillColor:1 ");
-                fillColorInBox(mImageOne, ContextCompat.getColor(mActivity, R.color.blue));
+                Log.d(TAG, "chooseBoxToFillColor: 1");
+                fillColorInBox(mImageOne, ContextCompat.getColor(mActivity, R.color.red));
                 break;
             }
             case 2: {
                 Log.d(TAG, "chooseBoxToFillColor: 2");
-                fillColorInBox(mImageTwo, ContextCompat.getColor(mActivity, R.color.red));
+                fillColorInBox(mImageTwo, ContextCompat.getColor(mActivity, R.color.yellow));
                 break;
             }
             case 3: {
                 Log.d(TAG, "chooseBoxToFillColor: 3");
-                fillColorInBox(mImageThree, ContextCompat.getColor(mActivity, R.color.yellow));
+                fillColorInBox(mImageThree, ContextCompat.getColor(mActivity, R.color.tomato));
                 break;
             }
             case 4: {
-                Log.d(TAG, "chooseBoxToFillColor: 4");
-                fillColorInBox(mImageFour, ContextCompat.getColor(mActivity, R.color.green));
+                Log.d(TAG, "chooseBoxToFillColor:4 ");
+                fillColorInBox(mImageFour, ContextCompat.getColor(mActivity, R.color.blue));
+                break;
+            }
+            case 5: {
+                Log.d(TAG, "chooseBoxToFillColor: 5");
+                fillColorInBox(mImageFive, ContextCompat.getColor(mActivity, R.color.green));
+                break;
+            }
+
+            case 6: {
+                Log.d(TAG, "chooseBoxToFillColor: 6");
+                fillColorInBox(mImageSix, ContextCompat.getColor(mActivity, R.color.teal_green));
+                break;
+            }
+            case 7: {
+                Log.d(TAG, "chooseBoxToFillColor: 7");
+                fillColorInBox(mImageSeven, ContextCompat.getColor(mActivity, R.color.voilet));
+                break;
+            }
+            case 8: {
+                Log.d(TAG, "chooseBoxToFillColor: 8");
+                fillColorInBox(mImageEight, ContextCompat.getColor(mActivity, R.color.light_brownish));
+                break;
+            }
+            case 9: {
+                Log.d(TAG, "chooseBoxToFillColor: 9");
+                fillColorInBox(mImageNine, ContextCompat.getColor(mActivity, R.color.pink));
                 break;
             }
 
@@ -340,7 +432,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
     }
 
     public interface TapTheGreyActivityInteraction {
-        void launchLevelTwo(int maxScore, String levelPassed);
+        void launchLevelThree(int maxScore, String passedLevel);
     }
 
 }

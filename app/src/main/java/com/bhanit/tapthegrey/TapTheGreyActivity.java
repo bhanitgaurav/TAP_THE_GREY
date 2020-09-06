@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +24,13 @@ import com.bhanit.tapthegrey.helper.Log;
 import java.util.Objects;
 
 
-public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener {
+public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener, LevelOneFragment.TapTheGreyActivityInteraction, LevelTwoFragment.TapTheGreyActivityInteraction {
     private static final String TAG = TapTheGreyActivity.class.getSimpleName();
+    private static int mMaxScoreOnTapTheGrey;
+    private static String mPassedLevel;
     private TextView mBhanitgauravEmail;
     private LevelOneFragment mLevelOneFragment;
+    private LevelTwoFragment mLevelTwoFragment;
     private Fragment mCurrentVisibleFragment, mPreviousFragment;
     private FragmentManager mManager = getSupportFragmentManager();
     private boolean mExit;
@@ -90,11 +94,24 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         ft.commit();
     }
 
+    /**
+     * Method helps to hide the current fragment and shows the new fragment
+     *
+     * @param mCurrentFragment current Fragment
+     * @param shownFragment    upcoming fragment to show
+     */
+    private void hideShowFragment(Fragment mCurrentFragment, Fragment shownFragment) {
+        hideFragment(mCurrentFragment);
+        addShowFragment(shownFragment);
+    }
+
     @Override
     public void onBackPressed() {
         Log.d(TAG, "onBackPressed: ");
         if (mCurrentVisibleFragment.equals(mLevelOneFragment) && !mExit)
             alertExit();
+        else if (mCurrentVisibleFragment.equals(mLevelTwoFragment) && mPreviousFragment != null)
+            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment);
         else
             super.onBackPressed();
     }
@@ -161,6 +178,35 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
                 "<font color='#0062b0'> <a href=\"" + URL + "\">Bhanit Gaurav</a> </font>"
                 , HtmlCompat.FROM_HTML_MODE_LEGACY));
         mBhanitgauravEmail.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    @Override
+    public void launchLevelTwo(int maxScore, String passedLevel) {
+        Log.d(TAG, "launchLevelTwo: ");
+        mMaxScoreOnTapTheGrey = maxScore;
+        mPassedLevel = passedLevel;
+        mPreviousFragment = mCurrentVisibleFragment;
+        hideFragment(mCurrentVisibleFragment);
+        if (mLevelTwoFragment == null) {
+            mLevelTwoFragment = LevelTwoFragment.newInstance();
+        }
+        addShowFragment(mLevelTwoFragment);
+//        updateMaxScore();
+    }
+
+    @Override
+    public void launchLevelThree(int maxScore, String passedLevel) {
+        Log.d(TAG, "launchLevelThree: maxScore " + maxScore);
+        mMaxScoreOnTapTheGrey = maxScore;
+        mPassedLevel = passedLevel;
+        onBackPressed();
+        Toast.makeText(this, "We are working on next level. Kindly wait for the next update.", Toast.LENGTH_SHORT).show();
+        /*mPreviousFragment = mCurrentVisibleFragment;
+        hideFragment(mCurrentVisibleFragment);
+        if (mLevelOneFragment == null) {
+            mLevelOneFragment = LevelOneFragment.newInstance();
+        }
+        addShowFragment(mLevelOneFragment);*/
     }
 }
 
