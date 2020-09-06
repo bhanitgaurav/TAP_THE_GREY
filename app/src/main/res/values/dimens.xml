@@ -5,4 +5,12 @@
     <dimen name="dimen_40sp">40sp</dimen>
     <dimen name="dimen_5dp">5dp</dimen>
     <dimen name="dimen_50dp">50dp</dimen>
+    <dimen name="dimen_240dp">240dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_18sp">18sp</dimen>
+    <dimen name="dimen_6dp">6dp</dimen>
+    <dimen name="dimen16sp">16sp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
 </resources>

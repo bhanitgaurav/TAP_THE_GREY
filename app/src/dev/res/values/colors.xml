@@ -11,9 +11,6 @@
     <color name="white">#ffffff</color>
     <color name="darkgrey">#959595</color>
     <color name="black_background">#B9181818</color>
-    <color name="dialog_color">#F5AEAE</color>
-    <color name="colorBlack">#000000</color>
-    <color name="colorActiveLite">#d5e7ec</color>
 
 
 </resources>

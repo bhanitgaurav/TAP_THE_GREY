@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dimen_240dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="@dimen/dimen_10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#36FF0000">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:contentDescription="@string/image_view"
+            android:src="@drawable/ic_info"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/heading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/proxima_nova_semi_bold"
+            android:gravity="center"
+            android:text="Get Updates"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimen_18sp"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_6dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/proxima_nova_regular"
+            android:gravity="center"
+            android:text="Allow Prisma to send you notifications when new art styles added. "
+            android:textSize="@dimen/dimen16sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline40"
+            app:layout_constraintEnd_toStartOf="@+id/guideline44"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline43"
+            app:layout_constraintTop_toBottomOf="@id/heading"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/useless"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:gravity="center"
+            android:text="useless"
+            android:textSize="@dimen/dimen16sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/guideline40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/not_allow"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:background="@drawable/buttom_border_alert"
+            android:fontFamily="@font/proxima_nova_semi_bold"
+            android:gravity="center"
+            android:textSize="@dimen/dimen16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline41"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/useless" />
+
+        <TextView
+            android:id="@+id/allow"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:background="@drawable/buttom_border_alert"
+            android:fontFamily="@font/proxima_nova_semi_bold"
+            android:gravity="center"
+            android:text="@string/allow"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimen16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline41"
+            app:layout_constraintTop_toBottomOf="@+id/useless" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline43"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.083333336" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9166667" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

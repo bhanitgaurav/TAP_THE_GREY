@@ -12,4 +12,10 @@
     <string name="bhanit_gaurav">Bhanit Gaurav</string>
     <string name="designed_with">Designed with lots of love by:</string>
     <string name="max_score">Max Score</string>
+    <string name="image_view">ImageView</string>
+    <string name="allow">Allow</string>
+    <string name="no">No</string>
+    <string name="yes">Exit</string>
+    <string name="exit">Exit</string>
+    <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit the app?</string>
 </resources>
