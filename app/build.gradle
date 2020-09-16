@@ -21,7 +21,7 @@ android {
         dev {
             dimension "api"
             versionCode 1
-            versionName "1.0.0"
+            versionName "1.1.0"
             applicationId "com.bhanit.tapthegrey"
             buildConfigField 'String', 'AUTHORITY', '"com.bhanit.tapthegrey"'
             dependencies {
@@ -36,7 +36,7 @@ android {
             applicationId "com.bhanit.tapthegrey"
             buildConfigField 'String', 'AUTHORITY', '"com.bhanit.tapthegrey"'
             versionCode 1
-            versionName "1.0.0"
+            versionName "1.1.0"
         }
     }
 
