@@ -1,4 +1,4 @@
-package com.bhanit.tapthegrey;
+package com.bhanit.tapthegrey.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bhanit.tapthegrey.R;
 import com.bhanit.tapthegrey.helper.Log;
 import com.bhanit.tapthegrey.utils.constants.TapTheGrey;
 

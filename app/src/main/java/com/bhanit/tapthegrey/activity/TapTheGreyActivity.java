@@ -1,4 +1,4 @@
-package com.bhanit.tapthegrey;
+package com.bhanit.tapthegrey.activity;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -19,20 +19,30 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bhanit.tapthegrey.R;
+import com.bhanit.tapthegrey.fragment.LevelOneFragment;
+import com.bhanit.tapthegrey.fragment.LevelThreeFragment;
+import com.bhanit.tapthegrey.fragment.LevelTwoFragment;
+import com.bhanit.tapthegrey.fragment.UnlockAllFragment;
 import com.bhanit.tapthegrey.helper.Log;
 
 import java.util.Objects;
 
 
-public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener, LevelOneFragment.TapTheGreyActivityInteraction, LevelTwoFragment.TapTheGreyActivityInteraction {
+public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener, LevelOneFragment.TapTheGreyActivityInteraction, LevelTwoFragment.TapTheGreyActivityInteraction, LevelThreeFragment.TapTheGreyActivityInteraction, UnlockAllFragment.TapTheGreyActivityInteraction {
     private static final String TAG = TapTheGreyActivity.class.getSimpleName();
     private static int mMaxScoreOnTapTheGrey;
     private static String mPassedLevel;
+    private static boolean isLevelLockUnlocked;
+    private static int mLockUnlockLevel;
     private TextView mBhanitgauravEmail;
     private LevelOneFragment mLevelOneFragment;
     private LevelTwoFragment mLevelTwoFragment;
+    private LevelThreeFragment mLevelThreeFragment;
+    private UnlockAllFragment mUnlockAllFragment;
     private Fragment mCurrentVisibleFragment, mPreviousFragment;
     private FragmentManager mManager = getSupportFragmentManager();
+    private ImageView mUnlockImage;
     private boolean mExit;
 
     @Override
@@ -41,16 +51,32 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_tag_the_grey);
         Log.d(TAG, "onCreate: ");
         initViewsAndSetOnclickListener();
+        openLevelOneFragment();
+        handleLevelUnlock();
+    }
+
+    private void openLevelOneFragment() {
+        Log.d(TAG, "openLevelOneFragment: ");
+//        mPreviousFragment = mCurrentVisibleFragment;
         if (mLevelOneFragment == null) {
             mLevelOneFragment = LevelOneFragment.newInstance();
-            addShowFragment(mLevelOneFragment);
         }
+        addShowFragment(mLevelOneFragment);
+    }
+
+    private void handleLevelUnlock() {
+        Log.d(TAG, "handleLevelUnlock: ");
+        if (isLevelLockUnlocked)
+            mUnlockImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_unlock));
+        else mUnlockImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_lock));
     }
 
     private void initViewsAndSetOnclickListener() {
         Log.d(TAG, "initViewsAndSetOnclickListener: ");
         mBhanitgauravEmail = findViewById(R.id.bottom_name);
         mBhanitgauravEmail.setOnClickListener(this);
+        mUnlockImage = findViewById(R.id.lock_unlock);
+        mUnlockImage.setOnClickListener(this);
 
     }
 
@@ -108,11 +134,18 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onBackPressed() {
         Log.d(TAG, "onBackPressed: ");
+        if (mPreviousFragment != null && mPreviousFragment == mUnlockAllFragment)
+            mUnlockImage.setVisibility(View.GONE);
         if (mCurrentVisibleFragment.equals(mLevelOneFragment) && !mExit)
             alertExit();
-        else if (mCurrentVisibleFragment.equals(mLevelTwoFragment) && mPreviousFragment != null)
-            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment);
-        else
+        else if (mCurrentVisibleFragment.equals(mLevelTwoFragment) && mLevelOneFragment != null && mPreviousFragment != null)
+            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment == mCurrentVisibleFragment ? mLevelOneFragment : mPreviousFragment);
+        else if (mCurrentVisibleFragment.equals(mLevelThreeFragment) && mLevelTwoFragment != null && mPreviousFragment != null)
+            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment == mCurrentVisibleFragment ? mLevelTwoFragment : mPreviousFragment);
+        else if (mCurrentVisibleFragment.equals(mUnlockAllFragment) && mPreviousFragment != null) {
+            mUnlockImage.setVisibility(View.VISIBLE);
+            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment == mCurrentVisibleFragment ? mLevelOneFragment : mPreviousFragment);
+        } else
             super.onBackPressed();
     }
 
@@ -143,7 +176,7 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
         leftButton.setText(getResources().getString(R.string.no));
         leftButton.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
 
-        openDialog.setCanceledOnTouchOutside(true);
+        openDialog.setCanceledOnTouchOutside(false);
 
         rightButton.setOnClickListener(v -> {
             Log.d(TAG, "onClick: ");
@@ -155,6 +188,7 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
             Log.d(TAG, "onClick: ");
             openDialog.dismiss();
             mExit = false;
+            mUnlockImage.setVisibility(View.VISIBLE);
         });
         openDialog.show();
     }
@@ -168,7 +202,28 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
                 mailTextSet();
                 break;
             }
+            case R.id.lock_unlock: {
+                Log.d(TAG, "onClick: lock_unlock");
+                if (isLevelLockUnlocked)
+                    openUnlockFragment();
+                else
+                    Toast.makeText(this, R.string.play_to_unlock_the_lock, Toast.LENGTH_LONG).show();
+                break;
+            }
         }
+    }
+
+    private void openUnlockFragment() {
+        Log.d(TAG, "openUnlockFragment: ");
+        mPreviousFragment = mCurrentVisibleFragment;
+        hideFragment(mCurrentVisibleFragment);
+        if (mUnlockAllFragment == null) {
+            mUnlockAllFragment = UnlockAllFragment.newInstance();
+        }
+        addShowFragment(mUnlockAllFragment);
+        if (mUnlockAllFragment != null)
+            mUnlockAllFragment.unLockLevel(mLockUnlockLevel);
+        mUnlockImage.setVisibility(View.GONE);
     }
 
     private void mailTextSet() {
@@ -181,10 +236,8 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void launchLevelTwo(int maxScore, String passedLevel) {
+    public void launchLevelTwo() {
         Log.d(TAG, "launchLevelTwo: ");
-        mMaxScoreOnTapTheGrey = maxScore;
-        mPassedLevel = passedLevel;
         mPreviousFragment = mCurrentVisibleFragment;
         hideFragment(mCurrentVisibleFragment);
         if (mLevelTwoFragment == null) {
@@ -195,18 +248,71 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void launchLevelThree(int maxScore, String passedLevel) {
-        Log.d(TAG, "launchLevelThree: maxScore " + maxScore);
-        mMaxScoreOnTapTheGrey = maxScore;
-        mPassedLevel = passedLevel;
-        onBackPressed();
-        Toast.makeText(this, "We are working on next level. Kindly wait for the next update.", Toast.LENGTH_SHORT).show();
-        /*mPreviousFragment = mCurrentVisibleFragment;
+    public void unlockTheLock(int levelToUnlock) {
+        Log.d(TAG, "unlockTheLock: " + levelToUnlock);
+        isLevelLockUnlocked = true;
+        if (mLockUnlockLevel < levelToUnlock)
+            mLockUnlockLevel = levelToUnlock;
+        handleLevelUnlock();
+    }
+
+    @Override
+    public void enableLock(boolean isEnabled) {
+        Log.d(TAG, "enableLock: " + isEnabled);
+        if (!isEnabled)
+            mUnlockImage.setVisibility(View.VISIBLE);
+        else mUnlockImage.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void launchLevelThree() {
+        Log.d(TAG, "launchLevelThree: maxScore ");
+        mPreviousFragment = mCurrentVisibleFragment;
         hideFragment(mCurrentVisibleFragment);
-        if (mLevelOneFragment == null) {
-            mLevelOneFragment = LevelOneFragment.newInstance();
+        if (mLevelThreeFragment == null) {
+            mLevelThreeFragment = LevelThreeFragment.newInstance();
         }
-        addShowFragment(mLevelOneFragment);*/
+        addShowFragment(mLevelThreeFragment);
+    }
+
+    @Override
+    public void launchLevelFour() {
+        Log.d(TAG, "launchLevelFour: ");
+//        onBackPressed();
+        Toast.makeText(this, "We are working on next level. Kindly wait for the next update.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void openLevelFragment(int adapterPosition) {
+        Log.d(TAG, "openLevelFragment: ");
+        mUnlockImage.setVisibility(View.VISIBLE);
+        switch (adapterPosition) {
+            case 1: {
+                Log.d(TAG, "onItemClicked: ");
+                if (mCurrentVisibleFragment != null) {
+                    hideFragment(mCurrentVisibleFragment);
+                    mPreviousFragment = mCurrentVisibleFragment;
+                }
+                openLevelOneFragment();
+                break;
+            }
+            case 2: {
+                Log.d(TAG, "onItemClicked: ");
+                launchLevelTwo();
+                break;
+            }
+            case 3: {
+                Log.d(TAG, "onItemClicked: ");
+                launchLevelThree();
+                break;
+            }
+            case 4: {
+                Log.d(TAG, "onItemClicked: ");
+                Toast.makeText(this, "We are working on next level. Kindly wait for the next update.", Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
+
     }
 }
 

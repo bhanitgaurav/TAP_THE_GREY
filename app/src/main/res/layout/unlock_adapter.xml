@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/background_head"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_64dp"
+    android:layout_margin="@dimen/dimen_6dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:padding="@dimen/dimen_12dp"
+    card_view:cardCornerRadius="@dimen/dimen_10dp"
+    card_view:cardElevation="@dimen/dimen_2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/level_image"
+            android:layout_width="@dimen/dimen_36sp"
+            android:layout_height="@dimen/dimen_36sp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:contentDescription="@string/level_image"
+            android:elevation="@dimen/dimen_4dp"
+            android:padding="@dimen/dimen_2dp"
+            android:src="@drawable/level_one"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/level_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/proxima_nova_semi_bold"
+            android:gravity="start"
+            android:paddingStart="@dimen/dimen_2dp"
+            android:paddingEnd="0dp"
+            android:singleLine="true"
+            android:textSize="@dimen/dimen_18sp"
+            app:layout_constraintBottom_toBottomOf="@id/level_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/level_image"
+            app:layout_constraintTop_toTopOf="@id/level_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

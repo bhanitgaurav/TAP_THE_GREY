@@ -14,7 +14,7 @@
         android:text="@string/tap_the_grey"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_height="@dimen/dimen_320dp"
         android:baselineAligned="false"
         android:elevation="0dp"
-        android:weightSum="2"
+        android:weightSum="4"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="@id/guideline">
@@ -46,10 +46,10 @@
             android:layout_weight="1"
             android:elevation="0dp"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="4">
 
             <ImageView
-                android:id="@+id/two"
+                android:id="@+id/one"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -62,11 +62,33 @@
             </ImageView>
 
             <ImageView
-                android:id="@+id/three"
+                android:id="@+id/two"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@color/yellow"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/three"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/tomato"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/ten"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_blakish"
                 android:contentDescription="@string/image"
                 android:foreground="?attr/selectableItemBackground">
 
@@ -79,10 +101,10 @@
             android:layout_weight="1"
             android:elevation="0dp"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="4">
 
             <ImageView
-                android:id="@+id/one"
+                android:id="@+id/four"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -95,7 +117,7 @@
             </ImageView>
 
             <ImageView
-                android:id="@+id/four"
+                android:id="@+id/five"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -104,7 +126,140 @@
                 android:foreground="?attr/selectableItemBackground">
 
             </ImageView>
+
+            <ImageView
+                android:id="@+id/six"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/teal_green"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/eleven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_cyan"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <ImageView
+                android:id="@+id/seven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/voilet"
+                android:contentDescription="@string/image"
+                android:elevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="NestedWeights">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/eight"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/light_brownish"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/nine"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/pink"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/twelve"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_light_voilet"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <ImageView
+                android:id="@+id/thirteen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_yellow"
+                android:contentDescription="@string/image"
+                android:elevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="NestedWeights">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/fourteen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_dirty"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/fifteen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_sky_blue"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/sixteen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_jean"
+                android:contentDescription="@string/image"
+                android:foreground="?attr/selectableItemBackground">
+
+            </ImageView>
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
@@ -166,7 +321,8 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/dimen_40sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
     </androidx.cardview.widget.CardView>
 
 

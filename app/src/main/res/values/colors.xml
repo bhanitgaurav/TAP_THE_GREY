@@ -21,5 +21,12 @@
     <color name="tomato">#CD5C5C</color>
     <color name="card_background_color">#36FF0000</color>
     <color name="color_level_passed">#ADDFAD</color>
+    <color name="color_blakish">#34495E</color>
+    <color name="color_cyan">#45B39D</color>
+    <color name="color_light_voilet">#A569BD</color>
+    <color name="color_yellow">#F1C40F</color>
+    <color name="color_dirty">#B7950B</color>
+    <color name="color_sky_blue">#3498DB</color>
+    <color name="color_jean">#0E6655</color>
 
 </resources>

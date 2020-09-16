@@ -22,4 +22,9 @@
     <string name="level_one_passed">Level One Passed</string>
     <string name="level_two_passed">Level Two Passed</string>
     <string name="go_to_next_level">Go to next level</string>
+    <string name="play_to_unlock_the_lock">Play to to Unlock the Lock</string>
+    <string name="level_image">level image</string>
+    <string name="level">Level</string>
+    <string name="levels">LEVELS</string>
+    <string name="level_three_passed">Level Three Passed</string>
 </resources>

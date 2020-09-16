@@ -13,7 +13,7 @@ public interface TapTheGrey {
     }
 
     interface LevelChange {
-        int LEVEL_CHANGE_SCORE = 90;
+        int LEVEL_CHANGE_SCORE = 1;
     }
 
     interface Time {
@@ -36,6 +36,15 @@ public interface TapTheGrey {
         String TWO = "two";
         String THREE = "three";
         String FOUR = "four";
+
+
+    }
+
+    interface LevelInInteger {
+        int ONE = 1;
+        int TWO = 2;
+        int THREE = 3;
+        int FOUR = 4;
 
 
     }
