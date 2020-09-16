@@ -13,7 +13,7 @@ public interface TapTheGrey {
     }
 
     interface LevelChange {
-        int LEVEL_CHANGE_SCORE = 1;
+        int LEVEL_CHANGE_SCORE = 90;
     }
 
     interface Time {
