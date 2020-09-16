@@ -20,7 +20,7 @@ android {
     productFlavors {
         dev {
             dimension "api"
-            versionCode 1
+            versionCode 2
             versionName "1.1.0"
             applicationId "com.bhanit.tapthegrey"
             buildConfigField 'String', 'AUTHORITY', '"com.bhanit.tapthegrey"'
@@ -35,7 +35,7 @@ android {
             dimension "api"
             applicationId "com.bhanit.tapthegrey"
             buildConfigField 'String', 'AUTHORITY', '"com.bhanit.tapthegrey"'
-            versionCode 1
+            versionCode 2
             versionName "1.1.0"
         }
     }
