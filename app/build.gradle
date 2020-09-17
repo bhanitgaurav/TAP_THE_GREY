@@ -44,7 +44,7 @@ android {
         release {
             minifyEnabled false
             shrinkResources false
-            debuggable true
+            debuggable false
             jniDebuggable false
             renderscriptDebuggable false
             pseudoLocalesEnabled false
