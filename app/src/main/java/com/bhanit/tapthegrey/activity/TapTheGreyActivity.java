@@ -2,8 +2,10 @@ package com.bhanit.tapthegrey.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.LinkMovementMethod;
@@ -199,18 +201,6 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
             mUnlockImage.setVisibility(View.VISIBLE);
             return;
         }
-//        if (mPreviousFragment != null && mPreviousFragment == mUnlockAllFragment)
-//            mUnlockImage.setVisibility(View.GONE);
-//        if (mCurrentVisibleFragment.equals(mLevelOneFragment) && !mExit)
-//            alertExit();
-//        else if (mCurrentVisibleFragment.equals(mLevelTwoFragment) && mLevelOneFragment != null && mPreviousFragment != null)
-//            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment == mCurrentVisibleFragment ? mLevelOneFragment : mPreviousFragment);
-//        else if (mCurrentVisibleFragment.equals(mLevelThreeFragment) && mLevelTwoFragment != null && mPreviousFragment != null)
-//            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment == mCurrentVisibleFragment ? mLevelTwoFragment : mPreviousFragment);
-//        else if (mCurrentVisibleFragment.equals(mUnlockAllFragment) && mPreviousFragment != null) {
-//            mUnlockImage.setVisibility(View.VISIBLE);
-//            hideShowFragment(mCurrentVisibleFragment, mPreviousFragment == mCurrentVisibleFragment ? mLevelOneFragment : mPreviousFragment);
-//        } else
         super.onBackPressed();
     }
 
@@ -413,6 +403,13 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
+    }
+
+    @Override
+    public void openTapTheGreyWebsite() {
+     Log.d(TAG, "openTapTheGreyWebsite: ");
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(TapTheGrey.WEBSITE));
+        startActivity(browserIntent);
     }
 }
 

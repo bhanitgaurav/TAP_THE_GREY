@@ -54,10 +54,6 @@ android {
     }
 
 
-    aaptOptions {
-        cruncherEnabled = true
-    }
-
     dexOptions {
         additionalParameters = ['--core-library']
     }

@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.bhanit.tapthegrey.BuildConfig;
 import com.bhanit.tapthegrey.R;
 
-public class MeFragment extends Fragment {
+public class MeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = MeFragment.class.getSimpleName();
     private TextView mVersion;
     private TapTheGreyActivityInteraction mTapTheGreyActivityInteraction;
@@ -43,6 +43,8 @@ public class MeFragment extends Fragment {
 
     private void initView(View view) {
         mVersion = view.findViewById(R.id.version_no);
+        view.findViewById(R.id.terms).setOnClickListener(this);
+        view.findViewById(R.id.privicy_policy).setOnClickListener(this);
     }
 
     @Override
@@ -59,7 +61,14 @@ public class MeFragment extends Fragment {
         mTapTheGreyActivityInteraction = null;
     }
 
+    @Override
+    public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
+        mTapTheGreyActivityInteraction.openTapTheGreyWebsite();
+    }
+
     public interface TapTheGreyActivityInteraction {
 
+        void openTapTheGreyWebsite();
     }
 }
