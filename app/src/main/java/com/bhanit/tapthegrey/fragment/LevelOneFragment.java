@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -56,9 +57,30 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.fragment_level_one, container, false);
         initViewAndListener(view);
+//        makeBlurToView(view);
         resetTapTheGrey();
         return view;
     }
+
+/*
+    private void makeBlurToView(View view) {
+        float radius = 0.1f;
+        View decorView = requireActivity().getWindow().getDecorView();
+        //ViewGroup you want to start blur from. Choose root as close to BlurView in hierarchy as possible.
+        ViewGroup rootView = (ViewGroup) decorView.findViewById(android.R.id.content);
+        //Set drawable to draw in the beginning of each blurred frame (Optional).
+        //Can be used in case your layout has a lot of transparent space and your content
+        //gets kinda lost after after blur is applied.
+        Drawable windowBackground = decorView.getBackground();
+
+        ((BlurView) view.findViewById(R.id.blurView)).setupWith(rootView)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(requireContext()))
+                .setBlurRadius(radius)
+                .setBlurAutoUpdate(true)
+                .setHasFixedTransformationMatrix(true); // Or false if it's in a scrolling container or might be animated
+    }
+*/
 
 
     @Override
@@ -171,7 +193,7 @@ public class LevelOneFragment extends Fragment implements View.OnClickListener {
         }
         if (mScore > mMaxScore)
             mMaxScore = mScore;
-        if (mScore == TapTheGrey.LevelChange.LEVEL_CHANGE_SCORE) {
+        if (mScore == TapTheGrey.LevelChange.LEVEL_CHANGE_SCORE_FOR_LEVEL_ONE) {
             levelOnePassedAndOpenLevelTwo();
         }
 

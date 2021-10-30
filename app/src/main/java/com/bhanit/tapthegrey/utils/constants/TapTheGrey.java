@@ -13,12 +13,18 @@ public interface TapTheGrey {
     }
 
     interface LevelChange {
-        int LEVEL_CHANGE_SCORE = 90;
+        int LEVEL_CHANGE_SCORE_FOR_LEVEL_ONE = 50;
+        int LEVEL_CHANGE_SCORE_FOR_LEVEL_TWO = 50;
+        int LEVEL_CHANGE_SCORE_FOR_LEVEL_THREE = 50;
+        int LEVEL_CHANGE_SCORE_FOR_LEVEL_FOUR = 50;
+
+        int LEVEL_CHANGE_SCORE = 80;
     }
 
     interface Time {
         int FIVE_SECOND = 5000;
         int ONE_SECOND = 1000;
+        int TWO_SECOND = 2000;
         int NINE_HUNDERED_MILLI_SECOND = 900;
         int EIGHT_HUNDERED_MILLI_SECOND = 800;
         int SEVEN_HUNDERED_MILLI_SECOND = 700;
@@ -59,17 +65,17 @@ public interface TapTheGrey {
 
     }
 
-     interface Count {
-         int SEVEN = 7;
-         int TEN = 10;
-         int TWENTY = 20;
-         int THIRTY = 30;
-         int FORTY = 40;
-         int FIFTY = 50;
-         int SIXTY = 60;
-         int SEVENTY = 70;
-         int EIGHTY = 80;
-         int NNETY = 90;
+    interface Count {
+        int SEVEN = 7;
+        int TEN = 10;
+        int TWENTY = 20;
+        int THIRTY = 30;
+        int FORTY = 40;
+        int FIFTY = 50;
+        int SIXTY = 60;
+        int SEVENTY = 70;
+        int EIGHTY = 80;
+        int NNETY = 90;
         int HUNDRED = 100;
 
 

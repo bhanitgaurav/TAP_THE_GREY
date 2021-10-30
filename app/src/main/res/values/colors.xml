@@ -3,6 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="transparent">@android:color/transparent</color>
     <color name="red">#ff6961</color>
     <color name="blue">#0088ab</color>
     <color name="green">#77dd77</color>
@@ -28,5 +29,11 @@
     <color name="color_dirty">#B7950B</color>
     <color name="color_sky_blue">#3498DB</color>
     <color name="color_jean">#0E6655</color>
+    <color name="color_organic_brown">#E3F9A6</color>
+    <color name="color_dark_salmon">#8B8000</color>
+    <color name="default_background">#c3d2f7</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="grey_white">#939393</color>
+    <color name="terms_bg">#eeeeee</color>
 
 </resources>

@@ -27,4 +27,8 @@
     <string name="level">Level</string>
     <string name="levels">LEVELS</string>
     <string name="level_three_passed">Level Three Passed</string>
+    <string name="version">version</string>
+    <string name="company_intro">\t\t\t\t\t\tThe TAP THE GREY game is the best way to concentrate and focus on moving blocks colors.\nTAP THE GREY helps to focus, to hit the grey block before turning it into it\'s original color.</string>
+    <string name="terms_conditions">Terms and Conditions.</string>
+    <string name="privicy_policy">Privacy and Policy.</string>
 </resources>

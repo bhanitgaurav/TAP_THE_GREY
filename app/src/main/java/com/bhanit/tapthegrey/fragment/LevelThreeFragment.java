@@ -267,7 +267,7 @@ public class LevelThreeFragment extends Fragment implements View.OnClickListener
         }
         if (mScore > mMaxScore)
             mMaxScore = mScore;
-        if (mScore == TapTheGrey.LevelChange.LEVEL_CHANGE_SCORE) {
+        if (mScore == TapTheGrey.LevelChange.LEVEL_CHANGE_SCORE_FOR_LEVEL_THREE) {
             levelOnePassedAndOpenLevelTwo();
         }
 
