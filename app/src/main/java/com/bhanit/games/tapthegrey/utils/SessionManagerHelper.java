@@ -13,9 +13,9 @@ public class SessionManagerHelper {
     private static final String PREFERENCE_NAME = "UserLoginPref";
     private static final String IS_LOGIN = "IsLoggedIn";
     private static final String PREF_USER_ID = "UserId";
-    private Context mContext;
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+    private final Context mContext;
+    private final SharedPreferences mSharedPreferences;
+    private final SharedPreferences.Editor mEditor;
 
     @SuppressLint("CommitPrefEdits")
     public SessionManagerHelper(Context context) {

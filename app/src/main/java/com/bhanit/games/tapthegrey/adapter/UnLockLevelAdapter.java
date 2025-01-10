@@ -20,9 +20,9 @@ import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey;
 
 public class UnLockLevelAdapter extends RecyclerView.Adapter<UnLockLevelAdapter.UnLockLevelViewHolder> {
     private static final String TAG = UnlockAllFragment.class.getSimpleName();
-    private Context mContext;
-    private int mLevelListToShow;
-    private OnItemClickListener mOnItemClickListener;
+    private final Context mContext;
+    private final int mLevelListToShow;
+    private final OnItemClickListener mOnItemClickListener;
     private int mUnlockedLevelList;
 
 
@@ -101,9 +101,9 @@ public class UnLockLevelAdapter extends RecyclerView.Adapter<UnLockLevelAdapter.
     }
 
     class UnLockLevelViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ImageView levelImage;
-        private TextView levelName;
-        private CardView cardView;
+        private final ImageView levelImage;
+        private final TextView levelName;
+        private final CardView cardView;
 
         public UnLockLevelViewHolder(@NonNull View itemView) {
             super(itemView);

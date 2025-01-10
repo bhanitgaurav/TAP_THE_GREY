@@ -3,7 +3,7 @@ package com.bhanit.games.tapthegrey.utils.constants;
 public interface TapTheGrey {
     String PREFERENCE_CITY_KEY = "city";
     String PREFERENCE_LOCATION_KEY = "location";
-    String WEBSITE = "http://bhanitgaurav.com/tapthegrey.html";
+    String WEBSITE = "https://bhanitgaurav.com/tapthegrey.html";
 
     interface NotificationConstants {
         String BUILDER = "builder";

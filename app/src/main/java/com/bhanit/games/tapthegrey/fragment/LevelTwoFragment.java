@@ -239,7 +239,7 @@ public class LevelTwoFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "updateScoreAndBoostSpeed: UNIT TIME " + UNIT_TIME);
 
         mScore = mScore + 1;
-        mScoreBoard.setText(String.format("Score: %s", String.valueOf(mScore)));
+        mScoreBoard.setText(String.format("Score: %s", mScore));
         if (mScore == mSpeedBooster) {
             UNIT_TIME = UNIT_TIME - TapTheGrey.Count.SEVEN * TapTheGrey.Count.SEVEN;
             mSpeedBooster = mSpeedBooster + TapTheGrey.Count.TEN;
@@ -310,7 +310,7 @@ public class LevelTwoFragment extends Fragment implements View.OnClickListener {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mActivity);
         alertDialog.setIcon(ContextCompat.getDrawable(mActivity, R.mipmap.ic_launcher_round));
         alertDialog.setTitle(getResources().getString(R.string.game_over));
-        alertDialog.setMessage("" + getString(R.string.your_score) + " " + String.valueOf(mScore));
+        alertDialog.setMessage(getString(R.string.your_score) + " " + mScore);
         alertDialog.setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.play_again), (DialogInterface dialog, int which) -> {
                     alertDialog.setCancelable(true);
@@ -328,7 +328,7 @@ public class LevelTwoFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "resetTapTheGrey: ");
         mScore = -1;
         isRunning = true;
-        mScoreBoard.setText(String.format("Score: %s", String.valueOf(0)));
+        mScoreBoard.setText(String.format("Score: %s", 0));
         mStart.setEnabled(true);
         mStart.setBackground(ContextCompat.getDrawable(mActivity, R.drawable.button));
         mStart.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
