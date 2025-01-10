@@ -35,5 +35,6 @@
     <color name="divider">#B6B6B6</color>
     <color name="grey_white">#939393</color>
     <color name="terms_bg">#eeeeee</color>
+    <color name="cardview_shadow_start_color">#03000000</color>
 
 </resources>
