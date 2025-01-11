@@ -1,21 +1,37 @@
-MIT License
+# Custom License for TAP THE GREY
 
-Copyright (c) [2025] [BhanitGauravApps]
+This license governs the use of the TAP THE GREY project. By using, modifying, or distributing this project, you agree to the terms outlined below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Terms and Conditions
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. **Permission to Use and Modify**
+   - Any individual, organization, institution, or company is allowed to use, copy, modify, and distribute this project's source code and assets.
+   - You must give **appropriate credit** to the original project and its creator, **Bhanit Gaurav**, in all versions and modifications of the project.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. **Attribution Requirements**
+   - Credit must include the following information:
+     - Name of the original project: **TAP THE GREY**.
+     - Name of the creator: **Bhanit Gaurav**.
+     - A link to the original project repository or website: [https://www.bhanit.com/tapthegrey](https://www.bhanit.com/tapthegrey).
+
+3. **Commercial Use**
+   - If the project or a modified version is used for commercial purposes (e.g., selling a product or generating revenue), you are required to:
+     - Notify **Bhanit Gaurav** before initiating the sale or distribution.
+     - Share **10% of the net profit** generated from the commercial use of the project or its derivatives with **Bhanit Gaurav**.
+   - Contact **Bhanit Gaurav** at [bhanitgauravapps@gmail.com](mailto:bhanitgauravapps@gmail.com) to discuss terms and provide the required profit share.
+
+4. **Prohibited Actions**
+   - You may not remove or alter the credit attribution to the original project and creator in any form.
+
+5. **Disclaimer of Warranty**
+   - This project is provided "as is," without warranty of any kind. The creator is not responsible for any damages or liabilities arising from the use of this project.
+
+6. **Termination of Rights**
+   - Failure to comply with the terms of this license may result in termination of your rights to use, modify, or distribute this project.
+
+## Contact Information
+For inquiries, permissions, or to fulfill the profit-sharing requirement, contact:
+- **Bhanit Gaurav**
+- Email: [bhanitgauravapps@gmail.com](mailto:bhanitgauravapps@gmail.com)
+
+By using this project, you agree to adhere to the terms outlined in this license.

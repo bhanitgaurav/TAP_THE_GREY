@@ -66,11 +66,13 @@ request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the TAPTHEGREY License. See the [LICENSE](LICENSE.txt) file for
+details.
 
 ## Contact
 
 For any inquiries or feedback, reach out to:
 
-- **Bhanit Gaurav**: [bhanit.gaurav@gmail.com](mailto:bhanit.gaurav@gmail.com)
+- **Bhanit Gaurav**: [bhanitgauravapps@gmail.com](mailto:bhanitgauravapps@gmail.com)
 - [LinkedIn](https://www.linkedin.com/in/bhanitgaurav)
+- [WEBSITE](https://www.bhanit.com)
