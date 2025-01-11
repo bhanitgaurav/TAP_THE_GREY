@@ -32,6 +32,6 @@ This license governs the use of the TAP THE GREY project. By using, modifying, o
 ## Contact Information
 For inquiries, permissions, or to fulfill the profit-sharing requirement, contact:
 - **Bhanit Gaurav**
-- Email: [bhanitgauravapps@gmail.com] (mailto:bhanitgauravapps@gmail.com)
+- Email: [bhanitgauravapps@gmail.com](mailto:bhanitgauravapps@gmail.com)
 
 By using this project, you agree to adhere to the terms outlined in this license.
