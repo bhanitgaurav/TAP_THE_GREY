@@ -1,159 +1,159 @@
-package com.bhanit.games.tapthegrey.fragment;
+package com.bhanit.games.tapthegrey.fragment
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.app.Dialog
+import android.content.Context
+import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.bhanit.games.tapthegrey.R
+import com.bhanit.games.tapthegrey.activity.TapTheGreyActivity
+import com.bhanit.games.tapthegrey.helper.Log
+import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
+class LevelTwoFragment : Fragment(), View.OnClickListener {
+    private lateinit var mImageOne: ImageView
+    private lateinit var mImageTwo: ImageView
+    private lateinit var mImageThree: ImageView
+    private lateinit var mImageFour: ImageView
+    private lateinit var mImageFive: ImageView
+    private lateinit var mImageSix: ImageView
+    private lateinit var mImageSeven: ImageView
+    private lateinit var mImageEight: ImageView
+    private lateinit var mImageNine: ImageView
+    private lateinit var mStart: TextView
+    private var mScoreBoard: TextView? = null
+    private var mMaxScoreView: TextView? = null
+    private var mSpeedBooster = TapTheGrey.Count.TEN
+    private var UNIT_TIME = TapTheGrey.Time.ONE_SECOND
+    private var isRunning = false
+    private var mActivity: TapTheGreyActivity? = null
+    private var isLevelUp = false
+    private var mTapTheGreyActivityInteraction: TapTheGreyActivityInteraction? = null
 
-import com.bhanit.games.tapthegrey.R;
-import com.bhanit.games.tapthegrey.activity.TapTheGreyActivity;
-import com.bhanit.games.tapthegrey.helper.Log;
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey;
-
-import java.util.Objects;
-
-public class LevelTwoFragment extends Fragment implements View.OnClickListener {
-    private static final String TAG = LevelTwoFragment.class.getSimpleName();
-    private static int mLastRandomNumber;
-    private static int mScore = -1;
-    private static int mMaxScore = 0;
-    private ImageView mImageOne, mImageTwo, mImageThree, mImageFour, mImageFive, mImageSix, mImageSeven, mImageEight, mImageNine;
-    private TextView mStart, mScoreBoard, mMaxScoreView;
-    private int mSpeedBooster = TapTheGrey.Count.TEN;
-    private int UNIT_TIME = TapTheGrey.Time.ONE_SECOND;
-    private boolean isRunning;
-    private TapTheGreyActivity mActivity;
-    private boolean isLevelUp;
-    private TapTheGreyActivityInteraction mTapTheGreyActivityInteraction;
-
-    public static LevelTwoFragment newInstance() {
-        Log.d(TAG, "newInstance: ");
-        LevelTwoFragment levelTwoFragment = new LevelTwoFragment();
-        return levelTwoFragment;
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(TAG, "onCreateView: ")
+        val view = inflater.inflate(R.layout.fragment_level_two, container, false)
+        initViewAndListener(view)
+        resetTapTheGrey()
+        return view
     }
 
-    public static int getRandomBetweenRange(int min, int max) {
-        Log.d(TAG, "getRandomBetweenRange: ");
-        int currentRandomNumber = (int) ((Math.random() * ((max - min) + 1)) + min);
-        Log.d(TAG, "getRandomBetweenRange: currentRandomNumber" + currentRandomNumber);
-        if (mLastRandomNumber == currentRandomNumber) {
-            return getRandomBetweenRange(1, 9);
-        } else {
-            mLastRandomNumber = currentRandomNumber;
-            return currentRandomNumber;
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d(TAG, "onStart: ")
+        mActivity = context as TapTheGreyActivity
+        mTapTheGreyActivityInteraction = context
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mActivity = null
+        mTapTheGreyActivityInteraction = null
+    }
+
+    private fun initViewAndListener(view: View) {
+        Log.d(TAG, "initViewAndListener: ")
+        mImageOne = view.findViewById(R.id.one)
+        mImageTwo = view.findViewById(R.id.two)
+        mImageThree = view.findViewById(R.id.three)
+        mImageFour = view.findViewById(R.id.four)
+        mImageFive = view.findViewById(R.id.five)
+        mImageSix = view.findViewById(R.id.six)
+        mImageSeven = view.findViewById(R.id.seven)
+        mImageEight = view.findViewById(R.id.eight)
+        mImageNine = view.findViewById(R.id.nine)
+        mStart = view.findViewById(R.id.start)
+        mScoreBoard = view.findViewById(R.id.score)
+
+        mMaxScoreView = view.findViewById(R.id.max_score)
+        mImageOne.setOnClickListener(this)
+        mImageTwo.setOnClickListener(this)
+        mImageThree.setOnClickListener(this)
+        mImageFour.setOnClickListener(this)
+        mImageFive.setOnClickListener(this)
+        mImageSix.setOnClickListener(this)
+        mImageSeven.setOnClickListener(this)
+        mImageEight.setOnClickListener(this)
+        mImageNine.setOnClickListener(this)
+        mStart.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View) {
+        Log.d(TAG, "onClick: ")
+        val buttonId = v.id
+
+        when (buttonId) {
+            R.id.start -> {
+                Log.d(TAG, "onClick: start")
+                mTapTheGreyActivityInteraction!!.enableLock(true)
+                startPlay()
+            }
+
+            R.id.one -> {
+                Log.d(TAG, "onClick: one")
+                hitGrey(1, v)
+            }
+
+            R.id.two -> {
+                Log.d(TAG, "onClick: two")
+                hitGrey(2, v)
+            }
+
+            R.id.three -> {
+                Log.d(TAG, "onClick: three")
+                hitGrey(3, v)
+            }
+
+            R.id.four -> {
+                Log.d(TAG, "onClick: four")
+                hitGrey(4, v)
+            }
+
+            R.id.five -> {
+                Log.d(TAG, "onClick: five")
+                hitGrey(5, v)
+            }
+
+            R.id.six -> {
+                Log.d(TAG, "onClick: six")
+                hitGrey(6, v)
+            }
+
+            R.id.seven -> {
+                Log.d(TAG, "onClick: seven")
+                hitGrey(7, v)
+            }
+
+            R.id.eight -> {
+                Log.d(TAG, "onClick: eight")
+                hitGrey(8, v)
+            }
+
+            R.id.nine -> {
+                Log.d(TAG, "onClick: nine")
+                hitGrey(9, v)
+            }
         }
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
-        View view = inflater.inflate(R.layout.fragment_level_two, container, false);
-        initViewAndListener(view);
-        resetTapTheGrey();
-        return view;
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onStart: ");
-        mActivity = (TapTheGreyActivity) context;
-        mTapTheGreyActivityInteraction = (TapTheGreyActivityInteraction) context;
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mActivity = null;
-        mTapTheGreyActivityInteraction = null;
-    }
-
-    private void initViewAndListener(View view) {
-        Log.d(TAG, "initViewAndListener: ");
-        mImageOne = view.findViewById(R.id.one);
-        mImageTwo = view.findViewById(R.id.two);
-        mImageThree = view.findViewById(R.id.three);
-        mImageFour = view.findViewById(R.id.four);
-        mImageFive = view.findViewById(R.id.five);
-        mImageSix = view.findViewById(R.id.six);
-        mImageSeven = view.findViewById(R.id.seven);
-        mImageEight = view.findViewById(R.id.eight);
-        mImageNine = view.findViewById(R.id.nine);
-        mStart = view.findViewById(R.id.start);
-        mScoreBoard = view.findViewById(R.id.score);
-
-        mMaxScoreView = view.findViewById(R.id.max_score);
-        mImageOne.setOnClickListener(this);
-        mImageTwo.setOnClickListener(this);
-        mImageThree.setOnClickListener(this);
-        mImageFour.setOnClickListener(this);
-        mImageFive.setOnClickListener(this);
-        mImageSix.setOnClickListener(this);
-        mImageSeven.setOnClickListener(this);
-        mImageEight.setOnClickListener(this);
-        mImageNine.setOnClickListener(this);
-        mStart.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        Log.d(TAG, "onClick: ");
-        int buttonId = v.getId();
-
-        if (buttonId == R.id.start) {
-            Log.d(TAG, "onClick: start");
-            mTapTheGreyActivityInteraction.enableLock(true);
-            startPlay();
-        } else if (buttonId == R.id.one) {
-            Log.d(TAG, "onClick: one");
-            hitGrey(1, v);
-        } else if (buttonId == R.id.two) {
-            Log.d(TAG, "onClick: two");
-            hitGrey(2, v);
-        } else if (buttonId == R.id.three) {
-            Log.d(TAG, "onClick: three");
-            hitGrey(3, v);
-        } else if (buttonId == R.id.four) {
-            Log.d(TAG, "onClick: four");
-            hitGrey(4, v);
-        } else if (buttonId == R.id.five) {
-            Log.d(TAG, "onClick: five");
-            hitGrey(5, v);
-        } else if (buttonId == R.id.six) {
-            Log.d(TAG, "onClick: six");
-            hitGrey(6, v);
-        } else if (buttonId == R.id.seven) {
-            Log.d(TAG, "onClick: seven");
-            hitGrey(7, v);
-        } else if (buttonId == R.id.eight) {
-            Log.d(TAG, "onClick: eight");
-            hitGrey(8, v);
-        } else if (buttonId == R.id.nine) {
-            Log.d(TAG, "onClick: nine");
-            hitGrey(9, v);
-        }
-//        switch (v.getId()) {
+        //        switch (v.getId()) {
 //            case R.id.start: {
 //                Log.d(TAG, "onClick: start");
 //                mTapTheGreyActivityInteraction.enableLock(true);
@@ -208,271 +208,286 @@ public class LevelTwoFragment extends Fragment implements View.OnClickListener {
 //        }
     }
 
-    private void startPlay() {
-        Log.d(TAG, "startPlay: ");
-        Runnable runnable;
-        Handler handler = new Handler();
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                Log.d(TAG, "run: ");
-                startPlay();
-                handler.removeCallbacks(this);
+    private fun startPlay() {
+        Log.d(TAG, "startPlay: ")
+        val runnable: Runnable
+        val handler = Handler(Looper.getMainLooper())
+        runnable = object : Runnable {
+            override fun run() {
+                Log.d(TAG, "run: ")
+                startPlay()
+                handler.removeCallbacks(this)
             }
-        };
-        Log.d(TAG, "startPlay:isRunning " + isRunning);
+        }
+        Log.d(TAG, "startPlay:isRunning $isRunning")
         if (isRunning) {
-            chooseBoxToFillColor(getRandomBetweenRange(1, 9));
-            handler.postDelayed(runnable, UNIT_TIME);
-            updateScoreAndBoostSpeed();
-            isRunning = false;
-            mStart.setEnabled(false);
-            mStart.setBackground(ContextCompat.getDrawable(mActivity, R.drawable.button_disable));
-            mStart.setTextColor(ContextCompat.getColor(mActivity, R.color.grey));
-        } else showAlertBox(isLevelUp);
-        Log.d(TAG, "startPlay:isRunning " + isRunning);
+            chooseBoxToFillColor(getRandomBetweenRange(1, 9))
+            handler.postDelayed(runnable, UNIT_TIME.toLong())
+            updateScoreAndBoostSpeed()
+            isRunning = false
+            mStart.isEnabled = false
+            mStart.background = ContextCompat.getDrawable(mActivity!!, R.drawable.button_disable)
+            mStart.setTextColor(ContextCompat.getColor(mActivity!!, R.color.grey))
+        } else showAlertBox(isLevelUp)
+        Log.d(TAG, "startPlay:isRunning $isRunning")
     }
 
-    private void updateScoreAndBoostSpeed() {
-        Log.d(TAG, "updateScoreAndBoostSpeed:mUpdateScore " + mScore);
-        Log.d(TAG, "updateScoreAndBoostSpeed: mSpeedBooster " + mSpeedBooster);
-        Log.d(TAG, "updateScoreAndBoostSpeed: UNIT TIME " + UNIT_TIME);
+    private fun updateScoreAndBoostSpeed() {
+        Log.d(TAG, "updateScoreAndBoostSpeed:mUpdateScore $mScore")
+        Log.d(TAG, "updateScoreAndBoostSpeed: mSpeedBooster $mSpeedBooster")
+        Log.d(TAG, "updateScoreAndBoostSpeed: UNIT TIME $UNIT_TIME")
 
-        mScore = mScore + 1;
-        mScoreBoard.setText(String.format("Score: %s", mScore));
+        mScore += 1
+        mScoreBoard!!.text = String.format("Score: %s", mScore)
         if (mScore == mSpeedBooster) {
-            UNIT_TIME = UNIT_TIME - TapTheGrey.Count.SEVEN * TapTheGrey.Count.SEVEN;
-            mSpeedBooster = mSpeedBooster + TapTheGrey.Count.TEN;
-            Toast toast = Toast.makeText(mActivity, "Speed Boosted",
-                    Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP | Gravity.CENTER, 00, 150);
-            toast.show();
-            Log.d(TAG, "updateScoreAndBoostSpeed: speed boosted");
+            UNIT_TIME -= TapTheGrey.Count.SEVEN * TapTheGrey.Count.SEVEN
+            mSpeedBooster += TapTheGrey.Count.TEN
+            val toast = Toast.makeText(
+                mActivity, "Speed Boosted",
+                Toast.LENGTH_SHORT
+            )
+            toast.setGravity(Gravity.TOP or Gravity.CENTER, 0, 150)
+            toast.show()
+            Log.d(TAG, "updateScoreAndBoostSpeed: speed boosted")
         }
-        if (mScore > mMaxScore)
-            mMaxScore = mScore;
+        if (mScore > mMaxScore) mMaxScore = mScore
         if (mScore == TapTheGrey.LevelChange.LEVEL_CHANGE_SCORE_FOR_LEVEL_TWO) {
-            levelOnePassedAndOpenLevelTwo();
+            levelOnePassedAndOpenLevelTwo()
         }
-
     }
 
-    private void levelOnePassedAndOpenLevelTwo() {
-        Log.d(TAG, "levelOnePassedAndOpenLevelTwo: ");
-        isLevelUp = true;
-        mTapTheGreyActivityInteraction.unlockTheLock(TapTheGrey.LevelInInteger.TWO);
-        alertDialog(getString(R.string.level_two_passed), getString(R.string.go_to_next_level));
+    private fun levelOnePassedAndOpenLevelTwo() {
+        Log.d(TAG, "levelOnePassedAndOpenLevelTwo: ")
+        isLevelUp = true
+        mTapTheGreyActivityInteraction!!.unlockTheLock(TapTheGrey.LevelInInteger.TWO)
+        alertDialog(getString(R.string.level_two_passed), getString(R.string.go_to_next_level))
     }
 
-    private void alertDialog(String message, String smallMessage) {
-        Log.d(TAG, "alertDialog()");
-        final Dialog openDialog = new Dialog(mActivity);
-        openDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Objects.requireNonNull(openDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        openDialog.setContentView(R.layout.custom_permission_dialog);
+    private fun alertDialog(message: String, smallMessage: String) {
+        Log.d(TAG, "alertDialog()")
+        val openDialog = Dialog(mActivity!!)
+        openDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        openDialog.window!!
+            .setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        openDialog.setContentView(R.layout.custom_permission_dialog)
 
-        ImageView image = openDialog.findViewById(R.id.image_view);
-        image.setVisibility(View.VISIBLE);
+        val image = openDialog.findViewById<ImageView>(R.id.image_view)
+        image.visibility = View.VISIBLE
 
-        ConstraintLayout layout = (ConstraintLayout) image.getParent();
-        layout.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.color_level_passed));
+        val layout = image.parent as ConstraintLayout
+        layout.setBackgroundColor(ContextCompat.getColor(mActivity!!, R.color.color_level_passed))
 
-        TextView dialogTextContent = openDialog.findViewById(R.id.heading);
-        TextView smallText = openDialog.findViewById(R.id.description);
+        val dialogTextContent = openDialog.findViewById<TextView>(R.id.heading)
+        val smallText = openDialog.findViewById<TextView>(R.id.description)
 
-        dialogTextContent.setText(message);
-        smallText.setText(smallMessage);
+        dialogTextContent.text = message
+        smallText.text = smallMessage
 
-        TextView rightButton = openDialog.findViewById(R.id.allow);
-        rightButton.setText(getResources().getString(R.string.next_level));
+        val rightButton = openDialog.findViewById<TextView>(R.id.allow)
+        rightButton.text = resources.getString(R.string.next_level)
 
-        TextView leftButton = openDialog.findViewById(R.id.not_allow);
-        leftButton.setText(getResources().getString(R.string.play_again));
-        leftButton.setTextColor(ContextCompat.getColor(mActivity, R.color.colorBlack));
+        val leftButton = openDialog.findViewById<TextView>(R.id.not_allow)
+        leftButton.text = resources.getString(R.string.play_again)
+        leftButton.setTextColor(ContextCompat.getColor(mActivity!!, R.color.colorBlack))
 
-        openDialog.setCanceledOnTouchOutside(false);
+        openDialog.setCanceledOnTouchOutside(false)
 
-        rightButton.setOnClickListener(v -> {
-            Log.d(TAG, "onClick: ");
-            openDialog.dismiss();
-            mTapTheGreyActivityInteraction.launchLevelThree();
-        });
-        leftButton.setOnClickListener(v -> {
-            Log.d(TAG, "onClick: ");
-            openDialog.dismiss();
-            resetTapTheGrey();
-        });
-        openDialog.show();
+        rightButton.setOnClickListener { _: View? ->
+            Log.d(TAG, "onClick: ")
+            openDialog.dismiss()
+            mTapTheGreyActivityInteraction!!.launchLevelThree()
+        }
+        leftButton.setOnClickListener {
+            Log.d(TAG, "onClick: ")
+            openDialog.dismiss()
+            resetTapTheGrey()
+        }
+        openDialog.show()
     }
 
-    private void showAlertBox(boolean isLevelUp) {
-        Log.d(TAG, "showAlertBox()");
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mActivity);
-        alertDialog.setIcon(ContextCompat.getDrawable(mActivity, R.mipmap.ic_launcher_round));
-        alertDialog.setTitle(getResources().getString(R.string.game_over));
-        alertDialog.setMessage(getString(R.string.your_score) + " " + mScore);
+    private fun showAlertBox(isLevelUp: Boolean) {
+        Log.d(TAG, "showAlertBox()")
+        val alertDialog = AlertDialog.Builder(
+            mActivity!!
+        )
+        alertDialog.setIcon(ContextCompat.getDrawable(mActivity!!, R.mipmap.ic_launcher_round))
+        alertDialog.setTitle(resources.getString(R.string.game_over))
+        alertDialog.setMessage(getString(R.string.your_score) + " " + mScore)
         alertDialog.setCancelable(false)
-                .setPositiveButton(getResources().getString(R.string.play_again), (DialogInterface dialog, int which) -> {
-                    alertDialog.setCancelable(true);
-                })
-                .setCancelable(true);
+            .setPositiveButton(resources.getString(R.string.play_again)) { _: DialogInterface?, _: Int ->
+                alertDialog.setCancelable(true)
+            }
+            .setCancelable(true)
         if (!isLevelUp) {
-            AlertDialog alert = alertDialog.create();
-            alert.show();
+            val alert = alertDialog.create()
+            alert.show()
         }
-        mTapTheGreyActivityInteraction.enableLock(false);
-        resetTapTheGrey();
+        mTapTheGreyActivityInteraction!!.enableLock(false)
+        resetTapTheGrey()
     }
 
-    private void resetTapTheGrey() {
-        Log.d(TAG, "resetTapTheGrey: ");
-        mScore = -1;
-        isRunning = true;
-        mScoreBoard.setText(String.format("Score: %s", 0));
-        mStart.setEnabled(true);
-        mStart.setBackground(ContextCompat.getDrawable(mActivity, R.drawable.button));
-        mStart.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
-        UNIT_TIME = TapTheGrey.Time.ONE_SECOND;
-        mSpeedBooster = TapTheGrey.Count.TEN;
-        mMaxScoreView.setText(String.valueOf(mMaxScore));
-        isLevelUp = false;
+    private fun resetTapTheGrey() {
+        Log.d(TAG, "resetTapTheGrey: ")
+        mScore = -1
+        isRunning = true
+        mScoreBoard!!.text = String.format("Score: %s", 0)
+        mStart.isEnabled = true
+        mStart.background = ContextCompat.getDrawable(mActivity!!, R.drawable.button)
+        mStart.setTextColor(ContextCompat.getColor(mActivity!!, R.color.white))
+        UNIT_TIME = TapTheGrey.Time.ONE_SECOND
+        mSpeedBooster = TapTheGrey.Count.TEN
+        mMaxScoreView!!.text = mMaxScore.toString()
+        isLevelUp = false
     }
 
-    private void hitGrey(int hitGrey, View v) {
-        Log.d(TAG, "hitGrey: " + hitGrey);
-        switch (hitGrey) {
-            case 1: {
-                Log.d(TAG, "hitGrey: 1 " + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+    private fun hitGrey(hitGrey: Int, v: View) {
+        Log.d(TAG, "hitGrey: $hitGrey")
+        when (hitGrey) {
+            1 -> {
+                Log.d(TAG, "hitGrey: 1 " + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 2: {
-                Log.d(TAG, "hitGrey: 2" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            2 -> {
+                Log.d(TAG, "hitGrey: 2" + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 3: {
-                Log.d(TAG, "hitGrey: 3" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            3 -> {
+                Log.d(TAG, "hitGrey: 3" + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 4: {
-                Log.d(TAG, "hitGrey: 4" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            4 -> {
+                Log.d(TAG, "hitGrey: 4" + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 5: {
-                Log.d(TAG, "hitGrey: 5" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            5 -> {
+                Log.d(TAG, "hitGrey: 5" + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 6: {
-                Log.d(TAG, "hitGrey: 6" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            6 -> {
+                Log.d(TAG, "hitGrey: 6" + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 7: {
-                Log.d(TAG, "hitGrey: 7" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            7 -> {
+                Log.d(TAG, "hitGrey: 7" + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 8: {
-                Log.d(TAG, "hitGrey: 8" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            8 -> {
+                Log.d(TAG, "hitGrey: 8" + v.tag)
+                if (v.tag != null) isRunning = true
             }
-            case 9: {
-                Log.d(TAG, "hitGrey: 9" + v.getTag());
-                if (v.getTag() != null)
-                    isRunning = true;
-                break;
+
+            9 -> {
+                Log.d(TAG, "hitGrey: 9" + v.tag)
+                if (v.tag != null) isRunning = true
             }
         }
     }
 
-    private void chooseBoxToFillColor(int chooseBox) {
-        Log.d(TAG, "chooseBoxToFillColor: ");
-        switch (chooseBox) {
-            case 1: {
-                Log.d(TAG, "chooseBoxToFillColor: 1");
-                fillColorInBox(mImageOne, ContextCompat.getColor(mActivity, R.color.red));
-                break;
-            }
-            case 2: {
-                Log.d(TAG, "chooseBoxToFillColor: 2");
-                fillColorInBox(mImageTwo, ContextCompat.getColor(mActivity, R.color.yellow));
-                break;
-            }
-            case 3: {
-                Log.d(TAG, "chooseBoxToFillColor: 3");
-                fillColorInBox(mImageThree, ContextCompat.getColor(mActivity, R.color.tomato));
-                break;
-            }
-            case 4: {
-                Log.d(TAG, "chooseBoxToFillColor:4 ");
-                fillColorInBox(mImageFour, ContextCompat.getColor(mActivity, R.color.blue));
-                break;
-            }
-            case 5: {
-                Log.d(TAG, "chooseBoxToFillColor: 5");
-                fillColorInBox(mImageFive, ContextCompat.getColor(mActivity, R.color.green));
-                break;
+    private fun chooseBoxToFillColor(chooseBox: Int) {
+        Log.d(TAG, "chooseBoxToFillColor: ")
+        when (chooseBox) {
+            1 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 1")
+                fillColorInBox(mImageOne, ContextCompat.getColor(mActivity!!, R.color.red))
             }
 
-            case 6: {
-                Log.d(TAG, "chooseBoxToFillColor: 6");
-                fillColorInBox(mImageSix, ContextCompat.getColor(mActivity, R.color.teal_green));
-                break;
+            2 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 2")
+                fillColorInBox(mImageTwo, ContextCompat.getColor(mActivity!!, R.color.yellow))
             }
-            case 7: {
-                Log.d(TAG, "chooseBoxToFillColor: 7");
-                fillColorInBox(mImageSeven, ContextCompat.getColor(mActivity, R.color.voilet));
-                break;
+
+            3 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 3")
+                fillColorInBox(mImageThree, ContextCompat.getColor(mActivity!!, R.color.tomato))
             }
-            case 8: {
-                Log.d(TAG, "chooseBoxToFillColor: 8");
-                fillColorInBox(mImageEight, ContextCompat.getColor(mActivity, R.color.light_brownish));
-                break;
+
+            4 -> {
+                Log.d(TAG, "chooseBoxToFillColor:4 ")
+                fillColorInBox(mImageFour, ContextCompat.getColor(mActivity!!, R.color.blue))
             }
-            case 9: {
-                Log.d(TAG, "chooseBoxToFillColor: 9");
-                fillColorInBox(mImageNine, ContextCompat.getColor(mActivity, R.color.pink));
-                break;
+
+            5 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 5")
+                fillColorInBox(mImageFive, ContextCompat.getColor(mActivity!!, R.color.green))
+            }
+
+            6 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 6")
+                fillColorInBox(mImageSix, ContextCompat.getColor(mActivity!!, R.color.teal_green))
+            }
+
+            7 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 7")
+                fillColorInBox(mImageSeven, ContextCompat.getColor(mActivity!!, R.color.voilet))
+            }
+
+            8 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 8")
+                fillColorInBox(
+                    mImageEight,
+                    ContextCompat.getColor(mActivity!!, R.color.light_brownish)
+                )
+            }
+
+            9 -> {
+                Log.d(TAG, "chooseBoxToFillColor: 9")
+                fillColorInBox(mImageNine, ContextCompat.getColor(mActivity!!, R.color.pink))
             }
 
         }
     }
 
-    private void fillColorInBox(ImageView boxToColor, int color) {
-        Log.d(TAG, "fillColorInBox: ");
-        boxToColor.setTag(TapTheGrey.Color.GREY);
-        boxToColor.setBackgroundColor(mActivity.getColor(R.color.darkgrey));
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(TAG, "run: ");
-                boxToColor.setTag(null);
-                boxToColor.setBackgroundColor(color);
-                handler.removeCallbacks(this);
+    private fun fillColorInBox(boxToColor: ImageView?, color: Int) {
+        Log.d(TAG, "fillColorInBox: ")
+        boxToColor!!.tag = TapTheGrey.Color.GREY
+        boxToColor.setBackgroundColor(mActivity!!.getColor(R.color.darkgrey))
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                Log.d(TAG, "run: ")
+                boxToColor.tag = null
+                boxToColor.setBackgroundColor(color)
+                handler.removeCallbacks(this)
             }
-        }, UNIT_TIME);
+        }, UNIT_TIME.toLong())
     }
 
-    public interface TapTheGreyActivityInteraction {
-        void launchLevelThree();
+    interface TapTheGreyActivityInteraction {
+        fun launchLevelThree()
 
-        void unlockTheLock(int levelToUnlock);
+        fun unlockTheLock(levelToUnlock: Int)
 
-        void enableLock(boolean isEnabled);
+        fun enableLock(isEnabled: Boolean)
     }
 
+    companion object {
+        private val TAG: String = LevelTwoFragment::class.java.simpleName
+        private var mLastRandomNumber = 0
+        private var mScore = -1
+        private var mMaxScore = 0
+        fun newInstance(): LevelTwoFragment {
+            Log.d(TAG, "newInstance: ")
+            val levelTwoFragment = LevelTwoFragment()
+            return levelTwoFragment
+        }
+
+        fun getRandomBetweenRange(min: Int, max: Int): Int {
+            Log.d(TAG, "getRandomBetweenRange: ")
+            val currentRandomNumber = ((Math.random() * ((max - min) + 1)) + min).toInt()
+            Log.d(TAG, "getRandomBetweenRange: currentRandomNumber$currentRandomNumber")
+            if (mLastRandomNumber == currentRandomNumber) {
+                return getRandomBetweenRange(1, 9)
+            } else {
+                mLastRandomNumber = currentRandomNumber
+                return currentRandomNumber
+            }
+        }
+    }
 }

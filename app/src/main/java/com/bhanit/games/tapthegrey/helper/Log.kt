@@ -1,36 +1,38 @@
-package com.bhanit.games.tapthegrey.helper;
+package com.bhanit.games.tapthegrey.helper
+
+import android.util.Log
+import com.bhanit.games.tapthegrey.utils.constants.BaseConstants
 
 
-import com.bhanit.games.tapthegrey.utils.constants.BaseConstants;
+object Log {
+    private const val LOG = BaseConstants.LOG_FLAG
 
-public class Log {
-    private static final boolean LOG = BaseConstants.LOG_FLAG;
-
-    public static void i(String tag, String string) {
-        if (LOG) android.util.Log.i(tag, string);
+    fun i(tag: String?, string: String?) {
+        if (LOG) Log.i(tag, string!!)
     }
 
-    public static void e(String tag, String string) {
-        if (LOG) android.util.Log.e(tag, string);
+    fun e(tag: String?, string: String?) {
+        if (LOG) Log.e(tag, string!!)
     }
 
-    public static void d(String tag, String string) {
-        if (LOG) android.util.Log.d(tag, string);
+    @JvmStatic
+    fun d(tag: String?, string: String?) {
+        if (LOG) Log.d(tag, string!!)
     }
 
-    public static void v(String tag, String string) {
-        if (LOG) android.util.Log.v(tag, string);
+    fun v(tag: String?, string: String?) {
+        if (LOG) Log.v(tag, string!!)
     }
 
-    public static void w(String tag, String string) {
-        if (LOG) android.util.Log.w(tag, string);
+    fun w(tag: String?, string: String?) {
+        if (LOG) Log.w(tag, string!!)
     }
 
-    public static void w(String tag, String string, Exception e) {
-        if (LOG) android.util.Log.w(tag, string, e);
+    fun w(tag: String?, string: String?, e: Exception?) {
+        if (LOG) Log.w(tag, string, e)
     }
 
-    public static void d(String tag, String string, Exception e) {
-        if (LOG) android.util.Log.d(tag, string, e);
+    fun d(tag: String?, string: String?, e: Exception?) {
+        if (LOG) Log.d(tag, string, e)
     }
 }

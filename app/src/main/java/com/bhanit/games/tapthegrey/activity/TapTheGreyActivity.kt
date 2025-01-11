@@ -1,95 +1,90 @@
-package com.bhanit.games.tapthegrey.activity;
+package com.bhanit.games.tapthegrey.activity
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.text.method.LinkMovementMethod;
-import android.view.View;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.method.LinkMovementMethod
+import android.view.View
+import android.view.Window
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
+import androidx.fragment.app.Fragment
+import com.bhanit.games.tapthegrey.R
+import com.bhanit.games.tapthegrey.fragment.LevelOneFragment
+import com.bhanit.games.tapthegrey.fragment.LevelThreeFragment
+import com.bhanit.games.tapthegrey.fragment.LevelTwoFragment
+import com.bhanit.games.tapthegrey.fragment.MeFragment
+import com.bhanit.games.tapthegrey.fragment.UnlockAllFragment
+import com.bhanit.games.tapthegrey.helper.Log
+import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.text.HtmlCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
+    LevelOneFragment.TapTheGreyActivityInteraction, LevelTwoFragment.TapTheGreyActivityInteraction,
+    LevelThreeFragment.TapTheGreyActivityInteraction,
+    UnlockAllFragment.TapTheGreyActivityInteraction,
+    MeFragment.TapTheGreyActivityInteraction {
+    private val mManager = supportFragmentManager
+    private var mBhanitgauravEmail: TextView? = null
+    private var mGameName: TextView? = null
+    private var mHeaderName: TextView? = null
+    private var mLevelOneFragment: LevelOneFragment? = null
+    private var mLevelTwoFragment: LevelTwoFragment? = null
+    private var mLevelThreeFragment: LevelThreeFragment? = null
+    private var mUnlockAllFragment: UnlockAllFragment? = null
+    private var mCurrentVisibleFragment: Fragment? = null
+    private var mPreviousFragment: Fragment? = null
+    private var mUnlockImage: ImageView? = null
+    private var mExit = false
+    private var developerLockUnlock = 0
+    private var mMeFragment: MeFragment? = null
 
-import com.bhanit.games.tapthegrey.R;
-import com.bhanit.games.tapthegrey.fragment.LevelOneFragment;
-import com.bhanit.games.tapthegrey.fragment.LevelThreeFragment;
-import com.bhanit.games.tapthegrey.fragment.LevelTwoFragment;
-import com.bhanit.games.tapthegrey.fragment.MeFragment;
-import com.bhanit.games.tapthegrey.fragment.UnlockAllFragment;
-import com.bhanit.games.tapthegrey.helper.Log;
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey;
-
-import java.util.Objects;
-
-
-public class TapTheGreyActivity extends AppCompatActivity implements View.OnClickListener, LevelOneFragment.TapTheGreyActivityInteraction, LevelTwoFragment.TapTheGreyActivityInteraction, LevelThreeFragment.TapTheGreyActivityInteraction, UnlockAllFragment.TapTheGreyActivityInteraction, MeFragment.TapTheGreyActivityInteraction {
-    private static final String TAG = TapTheGreyActivity.class.getSimpleName();
-    private static int mMaxScoreOnTapTheGrey;
-    private static String mPassedLevel;
-    private static boolean isLevelLockUnlocked;
-    private static int mLockUnlockLevel;
-    private final FragmentManager mManager = getSupportFragmentManager();
-    private TextView mBhanitgauravEmail, mGameName, mHeaderName;
-    private LevelOneFragment mLevelOneFragment;
-    private LevelTwoFragment mLevelTwoFragment;
-    private LevelThreeFragment mLevelThreeFragment;
-    private UnlockAllFragment mUnlockAllFragment;
-    private Fragment mCurrentVisibleFragment, mPreviousFragment;
-    private ImageView mUnlockImage;
-    private boolean mExit;
-    private int developerLockUnlock = 0;
-    private MeFragment mMeFragment;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tag_the_grey);
-        Log.d(TAG, "onCreate: ");
-        initViewsAndSetOnclickListener();
-        openLevelOneFragment();
-        handleLevelUnlock();
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_tag_the_grey)
+        Log.d(TAG, "onCreate: ")
+        initViewsAndSetOnclickListener()
+        openLevelOneFragment()
+        handleLevelUnlock()
     }
 
-    private void openLevelOneFragment() {
-        Log.d(TAG, "openLevelOneFragment: ");
-        if (mCurrentVisibleFragment != null)
-            hideFragment(mCurrentVisibleFragment);
+    private fun openLevelOneFragment() {
+        Log.d(TAG, "openLevelOneFragment: ")
+        if (mCurrentVisibleFragment != null) hideFragment(mCurrentVisibleFragment)
         if (mLevelOneFragment == null) {
-            mLevelOneFragment = LevelOneFragment.newInstance();
+            mLevelOneFragment = LevelOneFragment.newInstance()
         }
-        addShowFragment(mLevelOneFragment);
+        addShowFragment(mLevelOneFragment)
     }
 
-    private void handleLevelUnlock() {
-        Log.d(TAG, "handleLevelUnlock: ");
-        if (isLevelLockUnlocked)
-            mUnlockImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_unlock));
-        else mUnlockImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_lock));
+    private fun handleLevelUnlock() {
+        Log.d(TAG, "handleLevelUnlock: ")
+        if (isLevelLockUnlocked) mUnlockImage!!.setImageDrawable(
+            ContextCompat.getDrawable(
+                this, R.drawable.ic_unlock
+            )
+        )
+        else mUnlockImage!!.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_lock))
     }
 
-    private void initViewsAndSetOnclickListener() {
-        Log.d(TAG, "initViewsAndSetOnclickListener: ");
-        mGameName = findViewById(R.id.game_name);
-        mHeaderName = findViewById(R.id.textView);
-        mBhanitgauravEmail = findViewById(R.id.bottom_name);
-        mBhanitgauravEmail.setOnClickListener(this);
-        mUnlockImage = findViewById(R.id.lock_unlock);
-        mUnlockImage.setOnClickListener(this);
-        mGameName.setOnClickListener(this);
-
+    private fun initViewsAndSetOnclickListener() {
+        Log.d(TAG, "initViewsAndSetOnclickListener: ")
+        mGameName = findViewById(R.id.game_name)
+        mHeaderName = findViewById(R.id.textView)
+        mBhanitgauravEmail = findViewById(R.id.bottom_name)
+        mBhanitgauravEmail!!.setOnClickListener(this)
+        mUnlockImage = findViewById(R.id.lock_unlock)
+        mUnlockImage!!.setOnClickListener(this)
+        mGameName!!.setOnClickListener(this)
     }
 
     /**
@@ -97,16 +92,19 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
      *
      * @param fragment fragment to show or add
      */
-    private void addShowFragment(Fragment fragment) {
-        Log.d(TAG, "addShowFragment: " + fragment);
-        mCurrentVisibleFragment = fragment;
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction().setCustomAnimations(R.anim.slide_in, R.anim.slide_out);
-        if (!fragment.isAdded()) {
-            Log.d(TAG, "addShowFragment: fragment Added");
-            changeBackgroundAccordingToFragment(fragment);
-            fragmentTransaction.add(R.id.main_layout, fragment).commit();
-        } else
-            showFragment(fragment);
+    private fun addShowFragment(fragment: Fragment?) {
+        Log.d(
+            TAG,
+            "addShowFragment: $fragment"
+        )
+        mCurrentVisibleFragment = fragment
+        val fragmentTransaction =
+            mManager.beginTransaction().setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
+        if (!fragment!!.isAdded) {
+            Log.d(TAG, "addShowFragment: fragment Added")
+            changeBackgroundAccordingToFragment(fragment)
+            fragmentTransaction.add(R.id.main_layout, fragment).commit()
+        } else showFragment(fragment)
     }
 
     /**
@@ -114,11 +112,11 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
      *
      * @param fragment fragment to hide
      */
-    private void hideFragment(Fragment fragment) {
-        Log.d(TAG, "hideFragment: ");
-        FragmentTransaction ft = mManager.beginTransaction();
-        ft.hide(fragment);
-        ft.commit();
+    private fun hideFragment(fragment: Fragment?) {
+        Log.d(TAG, "hideFragment: ")
+        val ft = mManager.beginTransaction()
+        ft.hide(fragment!!)
+        ft.commit()
     }
 
     /**
@@ -126,44 +124,58 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
      *
      * @param fragment fragment to show
      */
-    private void showFragment(Fragment fragment) {
-        Log.d(TAG, "showFragment: ");
-        mCurrentVisibleFragment = fragment;
-        changeBackgroundAccordingToFragment(fragment);
-        FragmentTransaction ft = mManager.beginTransaction().setCustomAnimations(R.anim.slide_in, R.anim.slide_out);
-        ft.show(fragment);
-        ft.commit();
+    private fun showFragment(fragment: Fragment?) {
+        Log.d(TAG, "showFragment: ")
+        mCurrentVisibleFragment = fragment
+        changeBackgroundAccordingToFragment(fragment)
+        val ft = mManager.beginTransaction().setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
+        ft.show(fragment!!)
+        ft.commit()
     }
 
-    private void changeBackgroundAccordingToFragment(Fragment fragment) {
-        if (fragment instanceof MeFragment) {
-            mGameName.setVisibility(View.GONE);
-            mUnlockImage.setVisibility(View.GONE);
+    private fun changeBackgroundAccordingToFragment(fragment: Fragment?) {
+        if (fragment is MeFragment) {
+            mGameName!!.visibility = View.GONE
+            mUnlockImage!!.visibility = View.GONE
         } else {
-            if (fragment instanceof UnlockAllFragment) {
-                mGameName.setVisibility(View.GONE);
-                mHeaderName.setVisibility(View.VISIBLE);
+            if (fragment is UnlockAllFragment) {
+                mGameName!!.visibility = View.GONE
+                mHeaderName!!.visibility = View.VISIBLE
             } else {
-                mGameName.setVisibility(View.VISIBLE);
-                mHeaderName.setVisibility(View.GONE);
-
+                mGameName!!.visibility = View.VISIBLE
+                mHeaderName!!.visibility = View.GONE
             }
         }
 
-        if (fragment instanceof LevelOneFragment) {
-            findViewById(R.id.main_layout).setBackgroundColor(ContextCompat.getColor(this, R.color.default_background));
-            return;
+        if (fragment is LevelOneFragment) {
+            findViewById<View>(R.id.main_layout).setBackgroundColor(
+                ContextCompat.getColor(
+                    this, R.color.default_background
+                )
+            )
+            return
         }
-        if (fragment instanceof LevelTwoFragment) {
-            findViewById(R.id.main_layout).setBackgroundColor(ContextCompat.getColor(this, R.color.card_background_color));
-            return;
+        if (fragment is LevelTwoFragment) {
+            findViewById<View>(R.id.main_layout).setBackgroundColor(
+                ContextCompat.getColor(
+                    this, R.color.card_background_color
+                )
+            )
+            return
         }
-        if (fragment instanceof LevelThreeFragment) {
-            findViewById(R.id.main_layout).setBackgroundColor(ContextCompat.getColor(this, R.color.color_organic_brown));
-            return;
+        if (fragment is LevelThreeFragment) {
+            findViewById<View>(R.id.main_layout).setBackgroundColor(
+                ContextCompat.getColor(
+                    this, R.color.color_organic_brown
+                )
+            )
+            return
         }
-        findViewById(R.id.main_layout).setBackgroundColor(ContextCompat.getColor(this, R.color.cardview_shadow_start_color));
-
+        findViewById<View>(R.id.main_layout).setBackgroundColor(
+            ContextCompat.getColor(
+                this, R.color.cardview_shadow_start_color
+            )
+        )
     }
 
     /**
@@ -172,239 +184,256 @@ public class TapTheGreyActivity extends AppCompatActivity implements View.OnClic
      * @param mCurrentFragment current Fragment
      * @param shownFragment    upcoming fragment to show
      */
-    private void hideShowFragment(Fragment mCurrentFragment, Fragment shownFragment) {
-        hideFragment(mCurrentFragment);
-        addShowFragment(shownFragment);
+    private fun hideShowFragment(mCurrentFragment: Fragment, shownFragment: Fragment) {
+        hideFragment(mCurrentFragment)
+        addShowFragment(shownFragment)
     }
 
-    @Override
-    public void onBackPressed() {
-        Log.d(TAG, "onBackPressed: ");
-        if (mCurrentVisibleFragment instanceof LevelOneFragment && !mExit) {
-            alertExit();
-            return;
+    override fun onBackPressed() {
+        Log.d(TAG, "onBackPressed: ")
+        if (mCurrentVisibleFragment is LevelOneFragment && !mExit) {
+            alertExit()
+            return
         }
-        if (mCurrentVisibleFragment instanceof LevelTwoFragment) {
-            openLevelOneFragment();
-            return;
+        if (mCurrentVisibleFragment is LevelTwoFragment) {
+            openLevelOneFragment()
+            return
         }
-        if (mCurrentVisibleFragment instanceof LevelThreeFragment) {
+        if (mCurrentVisibleFragment is LevelThreeFragment) {
             if (mLevelTwoFragment == null) {
-                openLevelOneFragment();
-                return;
+                openLevelOneFragment()
+                return
             }
-            launchLevelTwo();
-            return;
+            launchLevelTwo()
+            return
         }
-        if (mCurrentVisibleFragment instanceof UnlockAllFragment || mCurrentVisibleFragment instanceof MeFragment) {
-            openPreviousFragment();
-            mUnlockImage.setVisibility(View.VISIBLE);
-            return;
+        if (mCurrentVisibleFragment is UnlockAllFragment || mCurrentVisibleFragment is MeFragment) {
+            openPreviousFragment()
+            mUnlockImage!!.visibility = View.VISIBLE
+            return
         }
-        super.onBackPressed();
+        super.onBackPressed()
     }
 
-    private void openPreviousFragment() {
-        Log.d(TAG, "openPreviousFragment: ");
-        handleLevelUnlock();
-        if (mPreviousFragment == null)
-            openLevelOneFragment();
+    private fun openPreviousFragment() {
+        Log.d(TAG, "openPreviousFragment: ")
+        handleLevelUnlock()
+        if (mPreviousFragment == null) openLevelOneFragment()
         else {
-            hideFragment(mCurrentVisibleFragment);
-            showFragment(mPreviousFragment);
+            hideFragment(mCurrentVisibleFragment)
+            showFragment(mPreviousFragment)
         }
     }
 
-    private void alertExit() {
-        Log.d(TAG, "alertExit: ");
-        alertDialog(getString(R.string.exit), getString(R.string.are_you_sure_you_want_to_exit));
+    private fun alertExit() {
+        Log.d(TAG, "alertExit: ")
+        alertDialog(getString(R.string.exit), getString(R.string.are_you_sure_you_want_to_exit))
     }
 
-    private void alertDialog(String message, String smallMessage) {
-        Log.d(TAG, "alertDialog()");
-        final Dialog openDialog = new Dialog(this);
-        openDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Objects.requireNonNull(openDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        openDialog.setContentView(R.layout.custom_permission_dialog);
-        ImageView image = openDialog.findViewById(R.id.image_view);
-        image.setVisibility(View.VISIBLE);
+    private fun alertDialog(message: String, smallMessage: String) {
+        Log.d(TAG, "alertDialog()")
+        val openDialog = Dialog(this)
+        openDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        openDialog.window!!
+            .setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        openDialog.setContentView(R.layout.custom_permission_dialog)
+        val image = openDialog.findViewById<ImageView>(R.id.image_view)
+        image.visibility = View.VISIBLE
 
-        TextView dialogTextContent = openDialog.findViewById(R.id.heading);
-        TextView smallText = openDialog.findViewById(R.id.description);
+        val dialogTextContent = openDialog.findViewById<TextView>(R.id.heading)
+        val smallText = openDialog.findViewById<TextView>(R.id.description)
 
-        dialogTextContent.setText(message);
-        smallText.setText(smallMessage);
+        dialogTextContent.text = message
+        smallText.text = smallMessage
 
-        TextView rightButton = openDialog.findViewById(R.id.allow);
-        rightButton.setText(getResources().getString(R.string.yes));
+        val rightButton = openDialog.findViewById<TextView>(R.id.allow)
+        rightButton.text = resources.getString(R.string.yes)
 
-        TextView leftButton = openDialog.findViewById(R.id.not_allow);
-        leftButton.setText(getResources().getString(R.string.no));
-        leftButton.setTextColor(ContextCompat.getColor(this, R.color.colorBlack));
+        val leftButton = openDialog.findViewById<TextView>(R.id.not_allow)
+        leftButton.text = resources.getString(R.string.no)
+        leftButton.setTextColor(ContextCompat.getColor(this, R.color.colorBlack))
 
-        openDialog.setCanceledOnTouchOutside(false);
+        openDialog.setCanceledOnTouchOutside(false)
 
-        rightButton.setOnClickListener(v -> {
-            Log.d(TAG, "onClick: ");
-            openDialog.dismiss();
-            mExit = true;
-            onBackPressed();
-        });
-        leftButton.setOnClickListener(v -> {
-            Log.d(TAG, "onClick: ");
-            openDialog.dismiss();
-            mExit = false;
-            mUnlockImage.setVisibility(View.VISIBLE);
-        });
-        openDialog.show();
+        rightButton.setOnClickListener { v: View? ->
+            Log.d(
+                TAG,
+                "onClick: "
+            )
+            openDialog.dismiss()
+            mExit = true
+            onBackPressed()
+        }
+        leftButton.setOnClickListener { v: View? ->
+            Log.d(
+                TAG,
+                "onClick: "
+            )
+            openDialog.dismiss()
+            mExit = false
+            mUnlockImage!!.visibility = View.VISIBLE
+        }
+        openDialog.show()
     }
 
     @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        Log.d(TAG, "onClick: ");
-        int buttonId = v.getId();
+    override fun onClick(v: View) {
+        Log.d(TAG, "onClick: ")
+        val buttonId = v.id
 
         if (buttonId == R.id.bottom_name) {
-            Log.d(TAG, "onClick: bhanitgaurav mail");
-            mailTextSet();
+            Log.d(TAG, "onClick: bhanitgaurav mail")
+            mailTextSet()
         } else if (buttonId == R.id.lock_unlock) {
-            Log.d(TAG, "onClick: lock_unlock");
+            Log.d(TAG, "onClick: lock_unlock")
             if (isLevelLockUnlocked || developerLockUnlock == 5) {
-                if (developerLockUnlock == 5)
-                    mLockUnlockLevel = 4;
-                isLevelLockUnlocked = true;
-                handleLevelUnlock();
-                openUnlockFragment();
+                if (developerLockUnlock == 5) mLockUnlockLevel = 4
+                isLevelLockUnlocked = true
+                handleLevelUnlock()
+                openUnlockFragment()
             } else {
-                if (developerLockUnlock == 0)
-                    Toast.makeText(this, R.string.play_to_unlock_the_lock, Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(() -> developerLockUnlock = 0, TapTheGrey.Time.TWO_SECOND);
-                developerLockUnlock++;
+                if (developerLockUnlock == 0) Toast.makeText(
+                    this,
+                    R.string.play_to_unlock_the_lock,
+                    Toast.LENGTH_SHORT
+                ).show()
+                Handler(Looper.getMainLooper()).postDelayed(
+                    { developerLockUnlock = 0 },
+                    TapTheGrey.Time.TWO_SECOND.toLong()
+                )
+                developerLockUnlock++
             }
         } else if (buttonId == R.id.game_name) {
-            openMeFragment();
+            openMeFragment()
         }
-
     }
 
-    private void openMeFragment() {
-        mPreviousFragment = mCurrentVisibleFragment;
-        hideFragment(mCurrentVisibleFragment);
+    private fun openMeFragment() {
+        mPreviousFragment = mCurrentVisibleFragment
+        hideFragment(mCurrentVisibleFragment)
         if (mMeFragment == null) {
-            mMeFragment = MeFragment.newInstance();
+            mMeFragment = MeFragment.newInstance()
         }
-        addShowFragment(mMeFragment);
+        addShowFragment(mMeFragment)
     }
 
-    private void openUnlockFragment() {
-        Log.d(TAG, "openUnlockFragment: ");
-        mPreviousFragment = mCurrentVisibleFragment;
-        hideFragment(mCurrentVisibleFragment);
+    private fun openUnlockFragment() {
+        Log.d(TAG, "openUnlockFragment: ")
+        mPreviousFragment = mCurrentVisibleFragment
+        hideFragment(mCurrentVisibleFragment)
         if (mUnlockAllFragment == null) {
-            mUnlockAllFragment = UnlockAllFragment.newInstance();
+            mUnlockAllFragment = UnlockAllFragment.newInstance()
         }
-        addShowFragment(mUnlockAllFragment);
-        if (mUnlockAllFragment != null)
-            mUnlockAllFragment.unLockLevel(mLockUnlockLevel);
-        mUnlockImage.setVisibility(View.GONE);
+        addShowFragment(mUnlockAllFragment)
+        if (mUnlockAllFragment != null) mUnlockAllFragment!!.unLockLevel(mLockUnlockLevel)
+        mUnlockImage!!.visibility = View.GONE
     }
 
-    private void mailTextSet() {
-        Log.d(TAG, "mailTextSet: ");
-        String URL = "https://www.bhanitgaurav.com/";
-        mBhanitgauravEmail.setText(HtmlCompat.fromHtml(
-                "<font color='#0062b0'> <a href=\"" + URL + "\">Bhanit Gaurav</a> </font>"
-                , HtmlCompat.FROM_HTML_MODE_LEGACY));
-        mBhanitgauravEmail.setMovementMethod(LinkMovementMethod.getInstance());
+    private fun mailTextSet() {
+        Log.d(TAG, "mailTextSet: ")
+        val URL = "https://www.bhanitgaurav.com/"
+        mBhanitgauravEmail!!.text = HtmlCompat.fromHtml(
+            "<font color='#0062b0'> <a href=\"$URL\">Bhanit Gaurav</a> </font>",
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
+        mBhanitgauravEmail!!.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    @Override
-    public void launchLevelTwo() {
-        Log.d(TAG, "launchLevelTwo: ");
-        mPreviousFragment = mCurrentVisibleFragment;
-        hideFragment(mCurrentVisibleFragment);
+    override fun launchLevelTwo() {
+        Log.d(TAG, "launchLevelTwo: ")
+        mPreviousFragment = mCurrentVisibleFragment
+        hideFragment(mCurrentVisibleFragment)
         if (mLevelTwoFragment == null) {
-            mLevelTwoFragment = LevelTwoFragment.newInstance();
+            mLevelTwoFragment = LevelTwoFragment.newInstance()
         }
-        addShowFragment(mLevelTwoFragment);
-//        updateMaxScore();
+        addShowFragment(mLevelTwoFragment)
+        //        updateMaxScore();
     }
 
-    @Override
-    public void unlockTheLock(int levelToUnlock) {
-        Log.d(TAG, "unlockTheLock: " + levelToUnlock);
-        isLevelLockUnlocked = true;
-        if (mLockUnlockLevel < levelToUnlock)
-            mLockUnlockLevel = levelToUnlock;
-        handleLevelUnlock();
+    override fun unlockTheLock(levelToUnlock: Int) {
+        Log.d(
+            TAG,
+            "unlockTheLock: $levelToUnlock"
+        )
+        isLevelLockUnlocked = true
+        if (mLockUnlockLevel < levelToUnlock) mLockUnlockLevel = levelToUnlock
+        handleLevelUnlock()
     }
 
-    @Override
-    public void enableLock(boolean isEnabled) {
-        Log.d(TAG, "enableLock: " + isEnabled);
-        if (!isEnabled)
-            mUnlockImage.setVisibility(View.VISIBLE);
-        else mUnlockImage.setVisibility(View.GONE);
+    override fun enableLock(isEnabled: Boolean) {
+        Log.d(
+            TAG,
+            "enableLock: $isEnabled"
+        )
+        if (!isEnabled) mUnlockImage!!.visibility = View.VISIBLE
+        else mUnlockImage!!.visibility = View.GONE
     }
 
-    @Override
-    public void launchLevelThree() {
-        Log.d(TAG, "launchLevelThree: maxScore ");
-        mPreviousFragment = mCurrentVisibleFragment;
-        hideFragment(mCurrentVisibleFragment);
+    override fun launchLevelThree() {
+        Log.d(TAG, "launchLevelThree: maxScore ")
+        mPreviousFragment = mCurrentVisibleFragment
+        hideFragment(mCurrentVisibleFragment)
         if (mLevelThreeFragment == null) {
-            mLevelThreeFragment = LevelThreeFragment.newInstance();
+            mLevelThreeFragment = LevelThreeFragment.newInstance()
         }
-        addShowFragment(mLevelThreeFragment);
+        addShowFragment(mLevelThreeFragment)
     }
 
-    @Override
-    public void launchLevelFour() {
-        Log.d(TAG, "launchLevelFour: ");
-//        onBackPressed();
-        Toast.makeText(this, "We are working on next level. Kindly wait for the next update.", Toast.LENGTH_LONG).show();
+    override fun launchLevelFour() {
+        Log.d(TAG, "launchLevelFour: ")
+        //        onBackPressed();
+        Toast.makeText(
+            this,
+            "We are working on next level. Kindly wait for the next update.",
+            Toast.LENGTH_LONG
+        ).show()
     }
 
-    @Override
-    public void openLevelFragment(int adapterPosition) {
-        Log.d(TAG, "openLevelFragment: ");
-        if (adapterPosition != 4)
-            mUnlockImage.setVisibility(View.VISIBLE);
-        switch (adapterPosition) {
-            case 1: {
-                Log.d(TAG, "onItemClicked: ");
+    override fun openLevelFragment(adapterPosition: Int) {
+        Log.d(TAG, "openLevelFragment: ")
+        if (adapterPosition != 4) mUnlockImage!!.visibility = View.VISIBLE
+        when (adapterPosition) {
+            1 -> {
+                Log.d(TAG, "onItemClicked: ")
                 if (mCurrentVisibleFragment != null) {
-                    hideFragment(mCurrentVisibleFragment);
-                    mPreviousFragment = mCurrentVisibleFragment;
+                    hideFragment(mCurrentVisibleFragment)
+                    mPreviousFragment = mCurrentVisibleFragment
                 }
-                openLevelOneFragment();
-                break;
+                openLevelOneFragment()
             }
-            case 2: {
-                Log.d(TAG, "onItemClicked: ");
-                launchLevelTwo();
-                break;
+
+            2 -> {
+                Log.d(TAG, "onItemClicked: ")
+                launchLevelTwo()
             }
-            case 3: {
-                Log.d(TAG, "onItemClicked: ");
-                launchLevelThree();
-                break;
+
+            3 -> {
+                Log.d(TAG, "onItemClicked: ")
+                launchLevelThree()
             }
-            case 4: {
-                Log.d(TAG, "onItemClicked: ");
-                Toast.makeText(this, "We are working on next level. Kindly wait for the next update.", Toast.LENGTH_LONG).show();
-                break;
+
+            4 -> {
+                Log.d(TAG, "onItemClicked: ")
+                Toast.makeText(
+                    this,
+                    "We are working on next level. Kindly wait for the next update.",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
-
     }
 
-    @Override
-    public void openTapTheGreyWebsite() {
-        Log.d(TAG, "openTapTheGreyWebsite: ");
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(TapTheGrey.WEBSITE));
-        startActivity(browserIntent);
+    override fun openTapTheGreyWebsite() {
+        Log.d(TAG, "openTapTheGreyWebsite: ")
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(TapTheGrey.WEBSITE))
+        startActivity(browserIntent)
+    }
+
+    companion object {
+        private val TAG: String = TapTheGreyActivity::class.java.simpleName
+        private const val mMaxScoreOnTapTheGrey = 0
+        private val mPassedLevel: String? = null
+        private var isLevelLockUnlocked = false
+        private var mLockUnlockLevel = 0
     }
 }
-

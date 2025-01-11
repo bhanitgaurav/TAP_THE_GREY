@@ -1,39 +1,49 @@
-package com.bhanit.games.tapthegrey.activity;
+package com.bhanit.games.tapthegrey.activity
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.Window;
-import android.view.WindowManager;
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.WindowInsets
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import com.bhanit.games.tapthegrey.R
+import com.bhanit.games.tapthegrey.helper.Log
+import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.bhanit.games.tapthegrey.R;
-import com.bhanit.games.tapthegrey.helper.Log;
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey;
-
-public class SplashActivity extends AppCompatActivity {
-    private static final String TAG = SplashActivity.class.getSimpleName();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_splash);
-        waitAndStartTapTheGreyActivity();
+@SuppressLint("CustomSplashScreen")
+class SplashActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window?.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        waitAndStartTapTheGreyActivity()
     }
 
-    private void waitAndStartTapTheGreyActivity() {
-        Log.d(TAG, "waitAndStartTapTheGreyActivity: ");
-        Runnable runnable = this::startDashboardActivity;
-        new Handler().postDelayed(runnable, TapTheGrey.Time.TWO_SECOND);
+    private fun waitAndStartTapTheGreyActivity() {
+        Log.d(TAG, "waitAndStartTapTheGreyActivity: ")
+        val runnable = Runnable { this.startDashboardActivity() }
+        Handler(Looper.getMainLooper()).postDelayed(runnable, TapTheGrey.Time.TWO_SECOND.toLong())
     }
 
-    private void startDashboardActivity() {
-        Log.d(TAG, "startDashboardActivity() method called");
-        Intent intent = new Intent(this, TapTheGreyActivity.class);
-        startActivity(intent);
-        finish();
+    private fun startDashboardActivity() {
+        Log.d(TAG, "startDashboardActivity() method called")
+        val intent = Intent(this, TapTheGreyActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    companion object {
+        private val TAG: String = SplashActivity::class.java.simpleName
     }
 }

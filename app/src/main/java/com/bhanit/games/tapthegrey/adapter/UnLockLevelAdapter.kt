@@ -1,126 +1,168 @@
-package com.bhanit.games.tapthegrey.adapter;
+package com.bhanit.games.tapthegrey.adapter
 
-import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.content.Context
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bhanit.games.tapthegrey.R
+import com.bhanit.games.tapthegrey.adapter.UnLockLevelAdapter.UnLockLevelViewHolder
+import com.bhanit.games.tapthegrey.fragment.UnlockAllFragment
+import com.bhanit.games.tapthegrey.helper.KeyUtils.Companion.convertIntoUpperCase
+import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bhanit.games.tapthegrey.R;
-import com.bhanit.games.tapthegrey.fragment.UnlockAllFragment;
-import com.bhanit.games.tapthegrey.helper.KeyUtils;
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey;
-
-public class UnLockLevelAdapter extends RecyclerView.Adapter<UnLockLevelAdapter.UnLockLevelViewHolder> {
-    private static final String TAG = UnlockAllFragment.class.getSimpleName();
-    private final Context mContext;
-    private final int mLevelListToShow;
-    private final OnItemClickListener mOnItemClickListener;
-    private int mUnlockedLevelList;
+class UnLockLevelAdapter(context: Context, levelToShow: Int, listner: OnItemClickListener) :
+    RecyclerView.Adapter<UnLockLevelViewHolder>() {
+    private val mContext: Context
+    private val mLevelListToShow: Int
+    private val mOnItemClickListener: OnItemClickListener
+    private var mUnlockedLevelList = 0
 
 
-    public UnLockLevelAdapter(Context context, int levelToShow, OnItemClickListener listner) {
-        Log.d(TAG, "UnLockLevelAdapter: ");
-        mContext = context;
-        mLevelListToShow = levelToShow;
-        mOnItemClickListener = listner;
+    init {
+        Log.d(TAG, "UnLockLevelAdapter: ")
+        mContext = context
+        mLevelListToShow = levelToShow
+        mOnItemClickListener = listner
     }
 
-    @NonNull
-    @Override
-    public UnLockLevelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder: ");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.unlock_adapter, parent, false);
-        return new UnLockLevelViewHolder(view);
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UnLockLevelViewHolder {
+        Log.d(TAG, "onCreateViewHolder: ")
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.unlock_adapter, parent, false)
+        return UnLockLevelViewHolder(view)
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull UnLockLevelViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: " + position);
+    override fun onBindViewHolder(holder: UnLockLevelViewHolder, position: Int) {
+        Log.d(TAG, "onBindViewHolder: $position")
         if (position <= mUnlockedLevelList) {
-            holder.cardView.getChildAt(0).setBackgroundColor(ContextCompat.getColor(mContext, R.color.color_level_passed));
-            setImageAndNameOnHolder(holder, position, "");
-            holder.cardView.setEnabled(true);
+            holder.cardView.getChildAt(0)
+                .setBackgroundColor(ContextCompat.getColor(mContext, R.color.color_level_passed))
+            setImageAndNameOnHolder(holder, position, "")
+            holder.cardView.isEnabled = true
         } else {
-            holder.cardView.getChildAt(0).setBackgroundColor(ContextCompat.getColor(mContext, R.color.card_background_color));
-            setImageAndNameOnHolder(holder, position, "Locked");
-            holder.cardView.setEnabled(false);
+            holder.cardView.getChildAt(0)
+                .setBackgroundColor(ContextCompat.getColor(mContext, R.color.card_background_color))
+            setImageAndNameOnHolder(holder, position, "Locked")
+            holder.cardView.isEnabled = false
         }
     }
 
-    private void setImageAndNameOnHolder(UnLockLevelViewHolder holder, int position, String locked) {
-        Log.d(TAG, "setImageAndNameOnHolder: " + position);
-        switch (position + 1) {
-            case 1: {
-                Log.d(TAG, "setImageAndNameOnHolder: ");
-                holder.levelImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.level_one));
-                holder.levelName.setText(String.format("%s %s %s", mContext.getResources().getString(R.string.level), KeyUtils.convertIntoUpperCase(TapTheGrey.Level.ONE), locked));
-                break;
+    private fun setImageAndNameOnHolder(
+        holder: UnLockLevelViewHolder,
+        position: Int,
+        locked: String
+    ) {
+        Log.d(TAG, "setImageAndNameOnHolder: $position")
+        when (position + 1) {
+            1 -> {
+                Log.d(TAG, "setImageAndNameOnHolder: ")
+                holder.levelImage.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        mContext,
+                        R.drawable.level_one
+                    )
+                )
+                holder.levelName.text = String.format(
+                    "%s %s %s",
+                    mContext.resources.getString(R.string.level),
+                    convertIntoUpperCase(TapTheGrey.Level.ONE),
+                    locked
+                )
             }
-            case 2: {
-                Log.d(TAG, "setImageAndNameOnHolder: ");
-                holder.levelImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.level_two));
-                holder.levelName.setText(String.format("%s %s %s", mContext.getResources().getString(R.string.level), KeyUtils.convertIntoUpperCase(TapTheGrey.Level.TWO), locked));
-                break;
+
+            2 -> {
+                Log.d(TAG, "setImageAndNameOnHolder: ")
+                holder.levelImage.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        mContext,
+                        R.drawable.level_two
+                    )
+                )
+                holder.levelName.text = String.format(
+                    "%s %s %s",
+                    mContext.resources.getString(R.string.level),
+                    convertIntoUpperCase(TapTheGrey.Level.TWO),
+                    locked
+                )
             }
-            case 3: {
-                Log.d(TAG, "setImageAndNameOnHolder: ");
-                holder.levelImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.level_three));
-                holder.levelName.setText(String.format("%s %s %s", mContext.getResources().getString(R.string.level), KeyUtils.convertIntoUpperCase(TapTheGrey.Level.THREE), locked));
-                break;
+
+            3 -> {
+                Log.d(TAG, "setImageAndNameOnHolder: ")
+                holder.levelImage.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        mContext,
+                        R.drawable.level_three
+                    )
+                )
+                holder.levelName.text = String.format(
+                    "%s %s %s",
+                    mContext.resources.getString(R.string.level),
+                    convertIntoUpperCase(TapTheGrey.Level.THREE),
+                    locked
+                )
             }
-            case 4: {
-                Log.d(TAG, "setImageAndNameOnHolder: ");
-                holder.levelImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.level_three));
-                holder.levelName.setText(String.format("%s %s %s", mContext.getResources().getString(R.string.level), KeyUtils.convertIntoUpperCase(TapTheGrey.Level.FOUR), locked));
-                break;
+
+            4 -> {
+                Log.d(TAG, "setImageAndNameOnHolder: ")
+                holder.levelImage.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        mContext,
+                        R.drawable.level_three
+                    )
+                )
+                holder.levelName.text = String.format(
+                    "%s %s %s",
+                    mContext.resources.getString(R.string.level),
+                    convertIntoUpperCase(TapTheGrey.Level.FOUR),
+                    locked
+                )
             }
         }
-
     }
 
-    @Override
-    public int getItemCount() {
-        return mLevelListToShow;
+    override fun getItemCount(): Int {
+        return mLevelListToShow
     }
 
-    public void updateUnlockList(int unlockLevel) {
-        Log.d(TAG, "updateUnlockList: " + unlockLevel);
-        mUnlockedLevelList = unlockLevel;
+    fun updateUnlockList(unlockLevel: Int) {
+        Log.d(TAG, "updateUnlockList: $unlockLevel")
+        mUnlockedLevelList = unlockLevel
     }
 
-    public interface OnItemClickListener {
-        void onItemClicked(int adapterPosition);
+    interface OnItemClickListener {
+        fun onItemClicked(adapterPosition: Int)
     }
 
-    class UnLockLevelViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final ImageView levelImage;
-        private final TextView levelName;
-        private final CardView cardView;
+    inner class UnLockLevelViewHolder(itemView: View) : ViewHolder(itemView), View.OnClickListener {
+        val levelImage: ImageView
+        val levelName: TextView
+        val cardView: CardView
 
-        public UnLockLevelViewHolder(@NonNull View itemView) {
-            super(itemView);
-            Log.d(TAG, "UnLockLevelViewHolder: ");
-            levelImage = itemView.findViewById(R.id.level_image);
-            levelName = itemView.findViewById(R.id.level_name);
-            cardView = itemView.findViewById(R.id.background_head);
-            cardView.setOnClickListener(this);
+        init {
+            Log.d(TAG, "UnLockLevelViewHolder: ")
+            levelImage = itemView.findViewById(R.id.level_image)
+            levelName = itemView.findViewById(R.id.level_name)
+            cardView = itemView.findViewById(R.id.background_head)
+            cardView.setOnClickListener(this)
         }
 
-        @Override
-        public void onClick(View v) {
-            Log.d(TAG, "onClick: ");
-            if (v.getId() == R.id.background_head) {
-                Log.d(TAG, "onClick: ");
-                mOnItemClickListener.onItemClicked(getAdapterPosition() + 1);
+        override fun onClick(v: View) {
+            Log.d(TAG, "onClick: ")
+            if (v.id == R.id.background_head) {
+                Log.d(TAG, "onClick: ")
+                mOnItemClickListener.onItemClicked(bindingAdapterPosition + 1)
             }
         }
+    }
+
+    companion object {
+        private val TAG: String = UnlockAllFragment::class.java.simpleName
     }
 }

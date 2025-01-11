@@ -1,6 +1,5 @@
-package com.bhanit.games.tapthegrey.utils.constants;
+package com.bhanit.games.tapthegrey.utils.constants
 
-public class BaseConstants {
-    public static final boolean LOG_FLAG = false;
-
+object BaseConstants {
+    const val LOG_FLAG: Boolean = false
 }

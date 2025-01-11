@@ -1,84 +1,94 @@
-package com.bhanit.games.tapthegrey.utils.constants;
+package com.bhanit.games.tapthegrey.utils.constants
 
-public interface TapTheGrey {
-    String PREFERENCE_CITY_KEY = "city";
-    String PREFERENCE_LOCATION_KEY = "location";
-    String WEBSITE = "https://bhanitgaurav.com/tapthegrey.html";
-
+interface TapTheGrey {
     interface NotificationConstants {
-        String BUILDER = "builder";
+        companion object {
+            const val BUILDER: String = "builder"
+        }
     }
 
     interface Color {
-        String GREY = "grey";
+        companion object {
+            const val GREY: String = "grey"
+        }
     }
 
     interface LevelChange {
-        int LEVEL_CHANGE_SCORE_FOR_LEVEL_ONE = 50;
-        int LEVEL_CHANGE_SCORE_FOR_LEVEL_TWO = 50;
-        int LEVEL_CHANGE_SCORE_FOR_LEVEL_THREE = 50;
-        int LEVEL_CHANGE_SCORE_FOR_LEVEL_FOUR = 50;
+        companion object {
+            const val LEVEL_CHANGE_SCORE_FOR_LEVEL_ONE: Int = 50
+            const val LEVEL_CHANGE_SCORE_FOR_LEVEL_TWO: Int = 50
+            const val LEVEL_CHANGE_SCORE_FOR_LEVEL_THREE: Int = 50
+            const val LEVEL_CHANGE_SCORE_FOR_LEVEL_FOUR: Int = 50
 
-        int LEVEL_CHANGE_SCORE = 80;
+            const val LEVEL_CHANGE_SCORE: Int = 80
+        }
     }
 
     interface Time {
-        int FIVE_SECOND = 5000;
-        int ONE_SECOND = 1000;
-        int TWO_SECOND = 2000;
-        int NINE_HUNDERED_MILLI_SECOND = 900;
-        int EIGHT_HUNDERED_MILLI_SECOND = 800;
-        int SEVEN_HUNDERED_MILLI_SECOND = 700;
-        int SIX_HUNDERED_MILLI_SECOND = 600;
-        int FIVE_HUNDERED_MILLI_SECOND = 500;
-        int FOUR_HUNDERED_MILLI_SECOND = 400;
-        int THREE_HUNDERED_MILLI_SECOND = 300;
-        int TWO_HUNDERED_MILLI_SECOND = 200;
-        int ONE_HUNDERED_MILLI_SECOND = 100;
-
+        companion object {
+            const val FIVE_SECOND: Int = 5000
+            const val ONE_SECOND: Int = 1000
+            const val TWO_SECOND: Int = 2000
+            const val NINE_HUNDERED_MILLI_SECOND: Int = 900
+            const val EIGHT_HUNDERED_MILLI_SECOND: Int = 800
+            const val SEVEN_HUNDERED_MILLI_SECOND: Int = 700
+            const val SIX_HUNDERED_MILLI_SECOND: Int = 600
+            const val FIVE_HUNDERED_MILLI_SECOND: Int = 500
+            const val FOUR_HUNDERED_MILLI_SECOND: Int = 400
+            const val THREE_HUNDERED_MILLI_SECOND: Int = 300
+            const val TWO_HUNDERED_MILLI_SECOND: Int = 200
+            const val ONE_HUNDERED_MILLI_SECOND: Int = 100
+        }
     }
 
     interface Level {
-        String ONE = "one";
-        String TWO = "two";
-        String THREE = "three";
-        String FOUR = "four";
-
-
+        companion object {
+            const val ONE: String = "one"
+            const val TWO: String = "two"
+            const val THREE: String = "three"
+            const val FOUR: String = "four"
+        }
     }
 
     interface LevelInInteger {
-        int ONE = 1;
-        int TWO = 2;
-        int THREE = 3;
-        int FOUR = 4;
-
-
+        companion object {
+            const val ONE: Int = 1
+            const val TWO: Int = 2
+            const val THREE: Int = 3
+            const val FOUR: Int = 4
+        }
     }
 
     interface SharedPreferences {
-        String CITY_LIST = "city_list";
-        String LOCALITY_LIST = "locality_list";
-        String IS_NEARBY_SELECTED = "is_nearby_selected";
-        String LATITUDE = "latitude";
-        String LONGITUDE = "longitude";
-        String USER_SAVE = "patient_save";
-
+        companion object {
+            const val CITY_LIST: String = "city_list"
+            const val LOCALITY_LIST: String = "locality_list"
+            const val IS_NEARBY_SELECTED: String = "is_nearby_selected"
+            const val LATITUDE: String = "latitude"
+            const val LONGITUDE: String = "longitude"
+            const val USER_SAVE: String = "patient_save"
+        }
     }
 
     interface Count {
-        int SEVEN = 7;
-        int TEN = 10;
-        int TWENTY = 20;
-        int THIRTY = 30;
-        int FORTY = 40;
-        int FIFTY = 50;
-        int SIXTY = 60;
-        int SEVENTY = 70;
-        int EIGHTY = 80;
-        int NNETY = 90;
-        int HUNDRED = 100;
+        companion object {
+            const val SEVEN: Int = 7
+            const val TEN: Int = 10
+            const val TWENTY: Int = 20
+            const val THIRTY: Int = 30
+            const val FORTY: Int = 40
+            const val FIFTY: Int = 50
+            const val SIXTY: Int = 60
+            const val SEVENTY: Int = 70
+            const val EIGHTY: Int = 80
+            const val NNETY: Int = 90
+            const val HUNDRED: Int = 100
+        }
+    }
 
-
+    companion object {
+        const val PREFERENCE_CITY_KEY: String = "city"
+        const val PREFERENCE_LOCATION_KEY: String = "location"
+        const val WEBSITE: String = "https://bhanitgaurav.com/tapthegrey.html"
     }
 }
