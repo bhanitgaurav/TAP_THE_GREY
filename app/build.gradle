@@ -2,8 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     namespace 'com.bhanit.games.tapthegrey'
-    compileSdkVersion 34
+    compileSdk 34
+
     buildFeatures.buildConfig = true
+
     defaultConfig {
         applicationId "com.bhanit.games.tapthegrey"
         minSdkVersion 24
@@ -11,36 +13,25 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode 1
+        versionName "1.0.0"
+        buildConfigField 'String', 'AUTHORITY', '"com.bhanit.games.tapthegrey"'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    flavorDimensions "api"
-    productFlavors {
-        production {
-            dimension "api"
-            applicationId "com.bhanit.games.tapthegrey"
-            buildConfigField 'String', 'AUTHORITY', '"com.bhanit.games.tapthegrey"'
-            versionCode 1
-            versionName "1.0.0"
-        }
-//        dev {
-//            dimension "api"
-//            versionCode 2
-//            versionName "1.1.0"
-//            applicationId "com.bhanit.games.tapthegrey"
-//            buildConfigField 'String', 'AUTHORITY', '"com.bhanit.games.tapthegrey"'
-//            dependencies {
-//                debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
-//                releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-//                testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-//                testImplementation 'junit:junit:4.13.2'
-//            }
-//        }
-    }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+            pseudoLocalesEnabled true
+            versionNameSuffix "-debug"
+        }
         release {
             minifyEnabled false
             shrinkResources false
@@ -52,6 +43,7 @@ android {
         }
     }
 }
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.7.0'
@@ -63,6 +55,4 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'me.biubiubiu.justifytext:library:1.1'
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
-
-
 }

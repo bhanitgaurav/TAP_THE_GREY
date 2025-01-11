@@ -1,6 +1,7 @@
 package com.bhanit.games.tapthegrey.helper;
 
-import constants.BaseConstants;
+
+import com.bhanit.games.tapthegrey.utils.constants.BaseConstants;
 
 public class Log {
     private static final boolean LOG = BaseConstants.LOG_FLAG;
