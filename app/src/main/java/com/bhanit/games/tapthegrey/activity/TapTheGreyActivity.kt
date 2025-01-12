@@ -15,6 +15,7 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
@@ -34,19 +35,20 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
     UnlockAllFragment.TapTheGreyActivityInteraction,
     MeFragment.TapTheGreyActivityInteraction {
     private val mManager = supportFragmentManager
-    private var mBhanitgauravEmail: TextView? = null
-    private var mGameName: TextView? = null
-    private var mHeaderName: TextView? = null
+    private lateinit var mBhanitGauravEmail: TextView
+    private lateinit var mGameName: TextView
+    private lateinit var mHeaderName: TextView
     private var mLevelOneFragment: LevelOneFragment? = null
     private var mLevelTwoFragment: LevelTwoFragment? = null
     private var mLevelThreeFragment: LevelThreeFragment? = null
     private var mUnlockAllFragment: UnlockAllFragment? = null
     private var mCurrentVisibleFragment: Fragment? = null
     private var mPreviousFragment: Fragment? = null
-    private var mUnlockImage: ImageView? = null
+    private lateinit var mUnlockImage: ImageView
     private var mExit = false
     private var developerLockUnlock = 0
     private var mMeFragment: MeFragment? = null
+    private lateinit var mOnBackPressedCallback: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +57,40 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         initViewsAndSetOnclickListener()
         openLevelOneFragment()
         handleLevelUnlock()
+        setOnBackPressed()
+    }
+
+    private fun setOnBackPressed() {
+        Log.d(TAG, "setOnBackPressed: ")
+        mOnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d(TAG, "onBackPressed: ")
+                if (mCurrentVisibleFragment is LevelOneFragment && !mExit) {
+                    alertExit()
+                    return
+                }
+                if (mCurrentVisibleFragment is LevelTwoFragment) {
+                    openLevelOneFragment()
+                    return
+                }
+                if (mCurrentVisibleFragment is LevelThreeFragment) {
+                    if (mLevelTwoFragment == null) {
+                        openLevelOneFragment()
+                        return
+                    }
+                    launchLevelTwo()
+                    return
+                }
+                if (mCurrentVisibleFragment is UnlockAllFragment || mCurrentVisibleFragment is MeFragment) {
+                    openPreviousFragment()
+                    mUnlockImage.visibility = View.VISIBLE
+                    return
+                }
+                isEnabled = false // Disable callback before calling super
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, mOnBackPressedCallback)
     }
 
     private fun openLevelOneFragment() {
@@ -68,23 +104,23 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun handleLevelUnlock() {
         Log.d(TAG, "handleLevelUnlock: ")
-        if (isLevelLockUnlocked) mUnlockImage!!.setImageDrawable(
+        if (isLevelLockUnlocked) mUnlockImage.setImageDrawable(
             ContextCompat.getDrawable(
                 this, R.drawable.ic_unlock
             )
         )
-        else mUnlockImage!!.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_lock))
+        else mUnlockImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_lock))
     }
 
     private fun initViewsAndSetOnclickListener() {
         Log.d(TAG, "initViewsAndSetOnclickListener: ")
         mGameName = findViewById(R.id.game_name)
         mHeaderName = findViewById(R.id.textView)
-        mBhanitgauravEmail = findViewById(R.id.bottom_name)
-        mBhanitgauravEmail!!.setOnClickListener(this)
+        mBhanitGauravEmail = findViewById(R.id.bottom_name)
+        mBhanitGauravEmail.setOnClickListener(this)
         mUnlockImage = findViewById(R.id.lock_unlock)
-        mUnlockImage!!.setOnClickListener(this)
-        mGameName!!.setOnClickListener(this)
+        mUnlockImage.setOnClickListener(this)
+        mGameName.setOnClickListener(this)
     }
 
     /**
@@ -135,15 +171,15 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun changeBackgroundAccordingToFragment(fragment: Fragment?) {
         if (fragment is MeFragment) {
-            mGameName!!.visibility = View.GONE
-            mUnlockImage!!.visibility = View.GONE
+            mGameName.visibility = View.GONE
+            mUnlockImage.visibility = View.GONE
         } else {
             if (fragment is UnlockAllFragment) {
-                mGameName!!.visibility = View.GONE
-                mHeaderName!!.visibility = View.VISIBLE
+                mGameName.visibility = View.GONE
+                mHeaderName.visibility = View.VISIBLE
             } else {
-                mGameName!!.visibility = View.VISIBLE
-                mHeaderName!!.visibility = View.GONE
+                mGameName.visibility = View.VISIBLE
+                mHeaderName.visibility = View.GONE
             }
         }
 
@@ -189,31 +225,31 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         addShowFragment(shownFragment)
     }
 
-    override fun onBackPressed() {
-        Log.d(TAG, "onBackPressed: ")
-        if (mCurrentVisibleFragment is LevelOneFragment && !mExit) {
-            alertExit()
-            return
-        }
-        if (mCurrentVisibleFragment is LevelTwoFragment) {
-            openLevelOneFragment()
-            return
-        }
-        if (mCurrentVisibleFragment is LevelThreeFragment) {
-            if (mLevelTwoFragment == null) {
-                openLevelOneFragment()
-                return
-            }
-            launchLevelTwo()
-            return
-        }
-        if (mCurrentVisibleFragment is UnlockAllFragment || mCurrentVisibleFragment is MeFragment) {
-            openPreviousFragment()
-            mUnlockImage!!.visibility = View.VISIBLE
-            return
-        }
-        super.onBackPressed()
-    }
+//    override fun onBackPressed() {
+//        Log.d(TAG, "onBackPressed: ")
+//        if (mCurrentVisibleFragment is LevelOneFragment && !mExit) {
+//            alertExit()
+//            return
+//        }
+//        if (mCurrentVisibleFragment is LevelTwoFragment) {
+//            openLevelOneFragment()
+//            return
+//        }
+//        if (mCurrentVisibleFragment is LevelThreeFragment) {
+//            if (mLevelTwoFragment == null) {
+//                openLevelOneFragment()
+//                return
+//            }
+//            launchLevelTwo()
+//            return
+//        }
+//        if (mCurrentVisibleFragment is UnlockAllFragment || mCurrentVisibleFragment is MeFragment) {
+//            openPreviousFragment()
+//            mUnlockImage.visibility = View.VISIBLE
+//            return
+//        }
+//        super.onBackPressed()
+//    }
 
     private fun openPreviousFragment() {
         Log.d(TAG, "openPreviousFragment: ")
@@ -255,7 +291,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
 
         openDialog.setCanceledOnTouchOutside(false)
 
-        rightButton.setOnClickListener { v: View? ->
+        rightButton.setOnClickListener {
             Log.d(
                 TAG,
                 "onClick: "
@@ -264,14 +300,14 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
             mExit = true
             onBackPressed()
         }
-        leftButton.setOnClickListener { v: View? ->
+        leftButton.setOnClickListener {
             Log.d(
                 TAG,
                 "onClick: "
             )
             openDialog.dismiss()
             mExit = false
-            mUnlockImage!!.visibility = View.VISIBLE
+            mUnlockImage.visibility = View.VISIBLE
         }
         openDialog.show()
     }
@@ -326,17 +362,17 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         }
         addShowFragment(mUnlockAllFragment)
         if (mUnlockAllFragment != null) mUnlockAllFragment!!.unLockLevel(mLockUnlockLevel)
-        mUnlockImage!!.visibility = View.GONE
+        mUnlockImage.visibility = View.GONE
     }
 
     private fun mailTextSet() {
         Log.d(TAG, "mailTextSet: ")
-        val URL = "https://www.bhanitgaurav.com/"
-        mBhanitgauravEmail!!.text = HtmlCompat.fromHtml(
-            "<font color='#0062b0'> <a href=\"$URL\">Bhanit Gaurav</a> </font>",
+        val url = "https://www.bhanitgaurav.com/"
+        mBhanitGauravEmail.text = HtmlCompat.fromHtml(
+            "<font color='#0062b0'> <a href=\"$url\">Bhanit Gaurav</a> </font>",
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
-        mBhanitgauravEmail!!.movementMethod = LinkMovementMethod.getInstance()
+        mBhanitGauravEmail.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun launchLevelTwo() {
@@ -365,8 +401,8 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
             TAG,
             "enableLock: $isEnabled"
         )
-        if (!isEnabled) mUnlockImage!!.visibility = View.VISIBLE
-        else mUnlockImage!!.visibility = View.GONE
+        if (!isEnabled) mUnlockImage.visibility = View.VISIBLE
+        else mUnlockImage.visibility = View.GONE
     }
 
     override fun launchLevelThree() {
@@ -391,7 +427,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun openLevelFragment(adapterPosition: Int) {
         Log.d(TAG, "openLevelFragment: ")
-        if (adapterPosition != 4) mUnlockImage!!.visibility = View.VISIBLE
+        if (adapterPosition != 4) mUnlockImage.visibility = View.VISIBLE
         when (adapterPosition) {
             1 -> {
                 Log.d(TAG, "onItemClicked: ")
