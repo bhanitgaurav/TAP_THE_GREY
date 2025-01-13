@@ -18,6 +18,12 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        removeStatusBar()
+        waitAndStartTapTheGreyActivity()
+    }
+
+    private fun removeStatusBar() {
+        Log.d(TAG, "removeStatusBar: ")
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window?.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -27,13 +33,12 @@ class SplashActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-        waitAndStartTapTheGreyActivity()
     }
 
     private fun waitAndStartTapTheGreyActivity() {
         Log.d(TAG, "waitAndStartTapTheGreyActivity: ")
         val runnable = Runnable { this.startDashboardActivity() }
-        Handler(Looper.getMainLooper()).postDelayed(runnable, TapTheGrey.Time.TWO_SECOND.toLong())
+        Handler(Looper.getMainLooper()).postDelayed(runnable, TapTheGrey.Time.ONE_SECOND.toLong())
     }
 
     private fun startDashboardActivity() {

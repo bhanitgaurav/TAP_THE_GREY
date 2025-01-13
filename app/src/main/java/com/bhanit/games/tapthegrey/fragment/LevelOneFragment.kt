@@ -48,7 +48,6 @@ class LevelOneFragment : Fragment(), View.OnClickListener {
         Log.d(TAG, "onCreateView: ")
         val view = inflater.inflate(R.layout.fragment_level_one, container, false)
         initViewAndListener(view)
-        //        makeBlurToView(view);
         resetTapTheGrey()
         return view
     }

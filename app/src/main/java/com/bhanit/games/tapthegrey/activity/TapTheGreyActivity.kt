@@ -34,7 +34,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
     LevelThreeFragment.TapTheGreyActivityInteraction,
     UnlockAllFragment.TapTheGreyActivityInteraction,
     MeFragment.TapTheGreyActivityInteraction {
-    private val mManager = supportFragmentManager
+    private val mManager by lazy { supportFragmentManager }
     private lateinit var mBhanitGauravEmail: TextView
     private lateinit var mGameName: TextView
     private lateinit var mHeaderName: TextView
@@ -99,17 +99,17 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         if (mLevelOneFragment == null) {
             mLevelOneFragment = LevelOneFragment.newInstance()
         }
-        addShowFragment(mLevelOneFragment)
+        addShowFragment(mLevelOneFragment!!)
     }
 
     private fun handleLevelUnlock() {
         Log.d(TAG, "handleLevelUnlock: ")
-        if (isLevelLockUnlocked) mUnlockImage.setImageDrawable(
+        mUnlockImage.setImageDrawable(
             ContextCompat.getDrawable(
-                this, R.drawable.ic_unlock
+                this,
+                if (isLevelLockUnlocked) R.drawable.ic_unlock else R.drawable.ic_lock
             )
         )
-        else mUnlockImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_lock))
     }
 
     private fun initViewsAndSetOnclickListener() {
@@ -128,7 +128,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
      *
      * @param fragment fragment to show or add
      */
-    private fun addShowFragment(fragment: Fragment?) {
+    private fun addShowFragment(fragment: Fragment) {
         Log.d(
             TAG,
             "addShowFragment: $fragment"
@@ -136,7 +136,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         mCurrentVisibleFragment = fragment
         val fragmentTransaction =
             mManager.beginTransaction().setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
-        if (!fragment!!.isAdded) {
+        if (!fragment.isAdded) {
             Log.d(TAG, "addShowFragment: fragment Added")
             changeBackgroundAccordingToFragment(fragment)
             fragmentTransaction.add(R.id.main_layout, fragment).commit()
@@ -160,12 +160,12 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
      *
      * @param fragment fragment to show
      */
-    private fun showFragment(fragment: Fragment?) {
+    private fun showFragment(fragment: Fragment) {
         Log.d(TAG, "showFragment: ")
         mCurrentVisibleFragment = fragment
         changeBackgroundAccordingToFragment(fragment)
         val ft = mManager.beginTransaction().setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
-        ft.show(fragment!!)
+        ft.show(fragment)
         ft.commit()
     }
 
@@ -257,7 +257,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         if (mPreviousFragment == null) openLevelOneFragment()
         else {
             hideFragment(mCurrentVisibleFragment)
-            showFragment(mPreviousFragment)
+            showFragment(mPreviousFragment!!)
         }
     }
 
@@ -350,7 +350,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         if (mMeFragment == null) {
             mMeFragment = MeFragment.newInstance()
         }
-        addShowFragment(mMeFragment)
+        addShowFragment(mMeFragment!!)
     }
 
     private fun openUnlockFragment() {
@@ -360,7 +360,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         if (mUnlockAllFragment == null) {
             mUnlockAllFragment = UnlockAllFragment.newInstance()
         }
-        addShowFragment(mUnlockAllFragment)
+        addShowFragment(mUnlockAllFragment!!)
         if (mUnlockAllFragment != null) mUnlockAllFragment!!.unLockLevel(mLockUnlockLevel)
         mUnlockImage.visibility = View.GONE
     }
@@ -382,7 +382,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         if (mLevelTwoFragment == null) {
             mLevelTwoFragment = LevelTwoFragment.newInstance()
         }
-        addShowFragment(mLevelTwoFragment)
+        addShowFragment(mLevelTwoFragment!!)
         //        updateMaxScore();
     }
 
@@ -412,7 +412,7 @@ class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
         if (mLevelThreeFragment == null) {
             mLevelThreeFragment = LevelThreeFragment.newInstance()
         }
-        addShowFragment(mLevelThreeFragment)
+        addShowFragment(mLevelThreeFragment!!)
     }
 
     override fun launchLevelFour() {

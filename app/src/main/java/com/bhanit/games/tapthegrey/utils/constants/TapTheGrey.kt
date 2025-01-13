@@ -59,16 +59,6 @@ interface TapTheGrey {
         }
     }
 
-    interface SharedPreferences {
-        companion object {
-            const val CITY_LIST: String = "city_list"
-            const val LOCALITY_LIST: String = "locality_list"
-            const val IS_NEARBY_SELECTED: String = "is_nearby_selected"
-            const val LATITUDE: String = "latitude"
-            const val LONGITUDE: String = "longitude"
-            const val USER_SAVE: String = "patient_save"
-        }
-    }
 
     interface Count {
         companion object {
@@ -87,8 +77,6 @@ interface TapTheGrey {
     }
 
     companion object {
-        const val PREFERENCE_CITY_KEY: String = "city"
-        const val PREFERENCE_LOCATION_KEY: String = "location"
         const val WEBSITE: String = "https://bhanitgaurav.com/tapthegrey.html"
     }
 }
