@@ -44,8 +44,8 @@ Follow these steps to get the TAP THE GREY game running on your local machine:
 
 ## Download
 
-Get the game on the Google Play Store:
-[Download TAP THE GREY](https://play.google.com/store/apps/details?id=com.bhanit.games.tapthegrey)
+Get the game on the Indus Play Store(PhonePe):
+[Download TAP THE GREY](https://www.indusappstore.com/apps/board/tapthegrey/com.bhanit.games.tapthegrey)
 
 Visit the official website:
 [Visit TAP THE GREY Website](https://www.bhanit.com/tapthegrey)
