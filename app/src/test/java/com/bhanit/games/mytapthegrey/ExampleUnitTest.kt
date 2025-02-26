@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey
+package com.bhanit.games.mytapthegrey
 
 import org.junit.Assert
 import org.junit.Test

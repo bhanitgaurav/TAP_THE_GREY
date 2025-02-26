@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.fragment
+package com.bhanit.games.mytapthegrey.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.bhanit.games.tapthegrey.BuildConfig
-import com.bhanit.games.tapthegrey.R
+import com.bhanit.games.mytapthegrey.BuildConfig
+import com.bhanit.games.mytapthegrey.R
 
 class MeFragment : Fragment(), View.OnClickListener {
     private var mVersion: TextView? = null

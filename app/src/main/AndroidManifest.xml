@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bhanit.games.tapthegrey">
+    package="com.bhanit.games.mytapthegrey">
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/TapTheGrey.NoActionBar">
         <activity
-            android:name="com.bhanit.games.tapthegrey.activity.SplashActivity"
+            android:name="com.bhanit.games.mytapthegrey.activity.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity">
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.bhanit.games.tapthegrey.activity.TapTheGreyActivity"
+            android:name="com.bhanit.games.mytapthegrey.activity.TapTheGreyActivity"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity" />
     </application>

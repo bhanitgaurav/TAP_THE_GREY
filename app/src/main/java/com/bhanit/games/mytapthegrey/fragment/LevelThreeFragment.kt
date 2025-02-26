@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.fragment
+package com.bhanit.games.mytapthegrey.fragment
 
 import android.app.Dialog
 import android.content.Context
@@ -20,10 +20,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.bhanit.games.tapthegrey.R
-import com.bhanit.games.tapthegrey.activity.TapTheGreyActivity
-import com.bhanit.games.tapthegrey.helper.Log
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
+import com.bhanit.games.mytapthegrey.R
+import com.bhanit.games.mytapthegrey.activity.TapTheGreyActivity
+import com.bhanit.games.mytapthegrey.helper.Log
+import com.bhanit.games.mytapthegrey.utils.constants.TapTheGrey
 
 class LevelThreeFragment : Fragment(), View.OnClickListener {
     private lateinit var mImageOne: ImageView

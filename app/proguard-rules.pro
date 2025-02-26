@@ -2,4 +2,4 @@
 -keepattributes *Annotation*
 
 # Keep public APIs
--keep public class com.bhanit.games.tapthegrey.** { *; }
+-keep public class com.bhanit.games.mytapthegrey.** { *; }

@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.utils.constants
+package com.bhanit.games.mytapthegrey.utils.constants
 
 interface TapTheGrey {
     interface NotificationConstants {

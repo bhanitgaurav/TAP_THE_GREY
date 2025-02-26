@@ -2,21 +2,21 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    namespace 'com.bhanit.games.tapthegrey'
+    namespace 'com.bhanit.games.mytapthegrey'
     compileSdk 35
 
     buildFeatures.buildConfig = true
 
     defaultConfig {
-        applicationId "com.bhanit.games.tapthegrey"
+        applicationId "com.bhanit.games.mytapthegrey"
         minSdkVersion 24
         targetSdk 34
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        versionCode 2
+        versionCode 1
         versionName "1.0.0"
-        buildConfigField 'String', 'AUTHORITY', '"com.bhanit.games.tapthegrey"'
+        buildConfigField 'String', 'AUTHORITY', '"com.bhanit.games.mytapthegrey"'
     }
 
     compileOptions {

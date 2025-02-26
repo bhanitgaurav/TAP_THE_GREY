@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey
+package com.bhanit.games.mytapthegrey
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        Assert.assertEquals("com.bhanit.games.tapthegrey", appContext.packageName)
+        Assert.assertEquals("com.bhanit.games.mytapthegrey", appContext.packageName)
     }
 }

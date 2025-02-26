@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.activity
+package com.bhanit.games.mytapthegrey.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -20,14 +20,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
-import com.bhanit.games.tapthegrey.R
-import com.bhanit.games.tapthegrey.fragment.LevelOneFragment
-import com.bhanit.games.tapthegrey.fragment.LevelThreeFragment
-import com.bhanit.games.tapthegrey.fragment.LevelTwoFragment
-import com.bhanit.games.tapthegrey.fragment.MeFragment
-import com.bhanit.games.tapthegrey.fragment.UnlockAllFragment
-import com.bhanit.games.tapthegrey.helper.Log
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
+import com.bhanit.games.mytapthegrey.R
+import com.bhanit.games.mytapthegrey.fragment.LevelOneFragment
+import com.bhanit.games.mytapthegrey.fragment.LevelThreeFragment
+import com.bhanit.games.mytapthegrey.fragment.LevelTwoFragment
+import com.bhanit.games.mytapthegrey.fragment.MeFragment
+import com.bhanit.games.mytapthegrey.fragment.UnlockAllFragment
+import com.bhanit.games.mytapthegrey.helper.Log
+import com.bhanit.games.mytapthegrey.utils.constants.TapTheGrey
 
 class TapTheGreyActivity : AppCompatActivity(), View.OnClickListener,
     LevelOneFragment.TapTheGreyActivityInteraction, LevelTwoFragment.TapTheGreyActivityInteraction,

@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.helper
+package com.bhanit.games.mytapthegrey.helper
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.DialogInterface
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.bhanit.games.tapthegrey.R
-import com.bhanit.games.tapthegrey.helper.Log.d
+import com.bhanit.games.mytapthegrey.R
+import com.bhanit.games.mytapthegrey.helper.Log.d
 import java.util.Locale
 
 class KeyUtils {

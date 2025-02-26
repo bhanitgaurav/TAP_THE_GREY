@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.activity
+package com.bhanit.games.mytapthegrey.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,9 +9,9 @@ import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.bhanit.games.tapthegrey.R
-import com.bhanit.games.tapthegrey.helper.Log
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
+import com.bhanit.games.mytapthegrey.R
+import com.bhanit.games.mytapthegrey.helper.Log
+import com.bhanit.games.mytapthegrey.utils.constants.TapTheGrey
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {

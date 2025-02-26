@@ -1,7 +1,7 @@
-package com.bhanit.games.tapthegrey.helper
+package com.bhanit.games.mytapthegrey.helper
 
 import android.util.Log
-import com.bhanit.games.tapthegrey.utils.constants.BaseConstants
+import com.bhanit.games.mytapthegrey.utils.constants.BaseConstants
 
 
 object Log {

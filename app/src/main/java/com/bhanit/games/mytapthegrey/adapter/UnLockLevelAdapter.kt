@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.adapter
+package com.bhanit.games.mytapthegrey.adapter
 
 import android.content.Context
 import android.util.Log
@@ -11,11 +11,11 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bhanit.games.tapthegrey.R
-import com.bhanit.games.tapthegrey.adapter.UnLockLevelAdapter.UnLockLevelViewHolder
-import com.bhanit.games.tapthegrey.fragment.UnlockAllFragment
-import com.bhanit.games.tapthegrey.helper.KeyUtils.Companion.convertIntoUpperCase
-import com.bhanit.games.tapthegrey.utils.constants.TapTheGrey
+import com.bhanit.games.mytapthegrey.R
+import com.bhanit.games.mytapthegrey.adapter.UnLockLevelAdapter.UnLockLevelViewHolder
+import com.bhanit.games.mytapthegrey.fragment.UnlockAllFragment
+import com.bhanit.games.mytapthegrey.helper.KeyUtils.Companion.convertIntoUpperCase
+import com.bhanit.games.mytapthegrey.utils.constants.TapTheGrey
 
 class UnLockLevelAdapter(context: Context, levelToShow: Int, listner: OnItemClickListener) :
     RecyclerView.Adapter<UnLockLevelViewHolder>() {

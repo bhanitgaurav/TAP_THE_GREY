@@ -1,4 +1,4 @@
-package com.bhanit.games.tapthegrey.fragment
+package com.bhanit.games.mytapthegrey.fragment
 
 import android.app.Activity
 import android.content.Context
@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bhanit.games.tapthegrey.R
-import com.bhanit.games.tapthegrey.adapter.UnLockLevelAdapter
-import com.bhanit.games.tapthegrey.helper.Log
+import com.bhanit.games.mytapthegrey.R
+import com.bhanit.games.mytapthegrey.adapter.UnLockLevelAdapter
+import com.bhanit.games.mytapthegrey.helper.Log
 
 class UnlockAllFragment : Fragment(), UnLockLevelAdapter.OnItemClickListener {
     private lateinit var mUnlockLevelRecyclerView: RecyclerView
